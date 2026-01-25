@@ -9,6 +9,30 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('user.home');
 });
+Route::get('/ad', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/menu', function () {
+    return view('admin.menu');
+});
+Route::get('/cus', function () {
+    return view('admin.customers');
+});
+Route::get('/or', function () {
+    return view('admin.orders');
+});
+Route::get('/foodMa', function () {
+    return view('admin.foodManagement');
+});
+
+Route::get('/food', function () {
+    return view('admin.food');
+});
+
+Route::get('/foodCat', function () {
+    return view('admin.category');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
