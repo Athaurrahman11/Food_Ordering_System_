@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestaurantController;
 
 Route::get('/', function () {
     return view('user.layout');
@@ -20,4 +21,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/restaurants', [RestaurantController::class, 'index']);
 require __DIR__.'/auth.php';
