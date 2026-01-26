@@ -5,12 +5,23 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
 
-route::get('AdminDashboard',[AdminController::class,'index']);
+route::get('admin_dashboard',[AdminController::class,'index']);
 
-route::get('menu',[AdminController::class,'menu']);
+route::get('menu',[AdminController::class,'menu'])->name('menu');
+
+
 
 route::get('add_menu',[AdminController::class,'menu_add']);
 route::post('menu_store',[AdminController::class,'menu_store']);
+
+route::get('delete_menu/{id}',[AdminController::class,'delete_menu']);
+
+route::get('edit_menu/{id}',[AdminController::class,'edit_menu']);
+route::get('orders',[AdminController::class,'orders']);
+route::get('add_food',[AdminController::class,'add_food']);
+route::get('food',[AdminController::class,'food']);
+
+route::post('update_menu/{id}',[AdminController::class,'update_menu']);
 
 
 
@@ -29,3 +40,11 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/restaurants', [RestaurantController::class, 'index']);
 require __DIR__.'/auth.php';
+
+route::get('home',function(){
+    return view('home');
+});
+
+route::get('ind',function(){
+    return view('restaurants.index');
+});

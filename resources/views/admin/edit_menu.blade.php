@@ -7,7 +7,7 @@
 
         <header class="h-16 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark flex items-center justify-between px-8">
             <div class="flex items-center gap-4">
-                <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Add New Menu Item</h2>
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Edit Menu Item</h2>
             </div>
 
         </header>
@@ -38,25 +38,25 @@
             
 
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Category</label>
-                            <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter Category " type="text" name="category"/>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300" >Category</label>
+                            <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" value="{{ $menu_item->category }}" placeholder="Enter Category " type="text" name="category"/>
                         </div>
 
                         <div class="md:col-span-2 space-y-2">
                             <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="description">
+                            <textarea class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="description" >{{ $menu_item->description }}
     </textarea>
                         </div>
 
                     </div>
                     <!-- Action Buttons -->
                     <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-100 dark:border-gray-800">
-                        <a href="{{ uri('menu') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">
+                        <a href="{{ route('menu') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">
                             Cancel
                         </a>
                         <button class="px-8 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary/90 transition-colors flex items-center gap-2" type="submit">
                             <a href="{{ uri('menu_store') }}" class="material-symbols-outlined text-sm" >save</a>
-                            Save Item
+                            Update Item
                         </button>
                     </div>
                 </form>
@@ -67,7 +67,3 @@
 
 
 @endsection
-
-
-
-

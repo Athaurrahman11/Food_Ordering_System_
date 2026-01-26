@@ -3,7 +3,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Order Management List - Admin Dashboard</title>
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -57,11 +59,11 @@
 </div>
 </div>
 <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="dash">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="{{ uri('admin_dashboard') }}">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="text-sm font-medium">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="orders">
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="{{ uri('orders') }}">
 <span class="material-symbols-outlined fill-[1]">shopping_bag</span>
 <span class="text-sm font-bold">Orders</span>
 </a>
@@ -70,14 +72,14 @@
 <span class="text-sm font-medium">Menu</span>
 </a>
 
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="menu">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="{{ uri('food') }}">
 <span class="material-symbols-outlined">restaurant_menu</span>
-<span class="text-sm font-medium">Food Management</span>
+<span class="text-sm font-medium">Food</span>
 </a>
 
 
 
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="food">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="{{ uri('customers') }}">
 <span class="material-symbols-outlined">group</span>
 <span class="text-sm font-medium">Customers</span>
 </a>
@@ -97,4 +99,5 @@
 
 
 </div>
+<script src="js/app.js"></script>
 </body>

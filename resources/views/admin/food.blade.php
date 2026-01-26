@@ -47,10 +47,13 @@
 <div class="relative">
 <select class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
 <option disabled="" selected="" value="">Select Category</option>
-<option value="appetizers">Appetizers</option>
-<option value="main-course">Main Course</option>
-<option value="desserts">Desserts</option>
-<option value="beverages">Beverages</option>
+
+
+@foreach ($items as $item)
+    <option value="{{ $item->category }}">{{ $item->category }}</option>
+@endforeach
+
+
 </select>
 <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">expand_more</span>
 </div>
