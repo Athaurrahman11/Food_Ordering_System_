@@ -1,13 +1,9 @@
 @extends('admin.layout')
 @section('content')
 
-<!-- Main Content Area -->
 <main class="flex-1 flex flex-col overflow-hidden">
-<!-- Top Navigation -->
 
-<!-- Page Scrollable Content -->
 <div class="flex-1 overflow-y-auto p-8">
-<!-- Breadcrumbs -->
 
 <header class="h-16 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark flex items-center justify-between px-8">
 <div class="flex items-center gap-4">
@@ -17,13 +13,11 @@
 </header>
 
 
-<!-- Page Heading -->
 
-<!-- Form Section -->
 <div class="max-w-3xl mx-auto">
 <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
 <form action="#" class="p-8 space-y-8">
-<!-- Image Upload Section -->
+
 <div class="space-y-3">
 <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Food Image</label>
 <div class="flex flex-col items-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-6 py-12 transition-colors hover:border-primary/50">
@@ -39,14 +33,15 @@
                                     </button>
 </div>
 </div>
-<!-- Form Grid -->
+
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Food Name -->
+
 <div class="md:col-span-2 space-y-2">
 <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Food Name</label>
 <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="e.g., Spicy Tuna Roll" type="text"/>
 </div>
-<!-- Category -->
+
 <div class="space-y-2">
 <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Category</label>
 <div class="relative">

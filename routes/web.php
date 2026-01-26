@@ -1,38 +1,21 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestaurantController;
 
-Route::get('/', function () {
-    return view('user.layout');
-});
-Route::get('/home', function () {
-    return view('user.home');
-});
-Route::get('/ad', function () {
-    return view('admin.dashboard');
-});
+route::get('AdminDashboard',[AdminController::class,'index']);
 
-Route::get('/menu', function () {
-    return view('admin.menu');
-});
-Route::get('/cus', function () {
-    return view('admin.customers');
-});
-Route::get('/or', function () {
-    return view('admin.orders');
-});
-Route::get('/foodMa', function () {
-    return view('admin.foodManagement');
-});
+route::get('menu',[AdminController::class,'menu']);
 
-Route::get('/food', function () {
-    return view('admin.food');
-});
+route::get('add_menu',[AdminController::class,'menu_add']);
+route::post('menu_store',[AdminController::class,'menu_store']);
 
-Route::get('/foodCat', function () {
-    return view('admin.category');
-});
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -44,4 +27,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/restaurants', [RestaurantController::class, 'index']);
 require __DIR__.'/auth.php';

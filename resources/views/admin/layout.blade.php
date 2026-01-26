@@ -57,15 +57,15 @@
 </div>
 </div>
 <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="ad">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="dash">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="text-sm font-medium">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="or">
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="orders">
 <span class="material-symbols-outlined fill-[1]">shopping_bag</span>
 <span class="text-sm font-bold">Orders</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="menu">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="{{ uri('menu') }}">
 <span class="material-symbols-outlined">menu_book</span>
 <span class="text-sm font-medium">Menu</span>
 </a>
@@ -77,7 +77,7 @@
 
 
 
-<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="food">
 <span class="material-symbols-outlined">group</span>
 <span class="text-sm font-medium">Customers</span>
 </a>
