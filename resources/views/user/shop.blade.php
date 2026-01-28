@@ -23,11 +23,11 @@
             <span class="text-xl font-bold">FoodieSystem</span>
         </div>
         <nav class="hidden md:flex gap-8 text-sm font-semibold">
-            <a href="{{ route('user.home') }}" class="hover:text-[#f48c25]">Home</a>
-            <a href="{{ route('user.shop') }}" class="text-[#f48c25]">Shop</a>
-            <a href="{{ route('user.about') }}" class="hover:text-[#f48c25]">About</a>
-            <a href="{{ route('user.contact')}}" class="hover:text-[#f48c25]"> Contact </a>
-            <a href="{{ route('user.tracking') }}" class="hover:text-[#f48c25]">Tracking</a>
+            <a href="{{ route('home') }}" class="hover:text-[#f48c25]">Home</a>
+            <a href="{{ route('shop') }}" class="text-[#f48c25]">Shop</a>
+            <a href="{{ route('about') }}" class="hover:text-[#f48c25]">About</a>
+            <a href="{{ route('contact')}}" class="hover:text-[#f48c25]"> Contact </a>
+            <a href="{{ route('tracking') }}" class="hover:text-[#f48c25]">Tracking</a>
         </nav>
         <div class="flex items-center gap-4">
             <div class="relative bg-slate-100 p-2 rounded-full cursor-pointer">
