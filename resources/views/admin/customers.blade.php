@@ -76,7 +76,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">{{ $customer->email }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">{{ $customer->created_at->format('M d, Y') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">{{ $customer->created_at?->format('M d, Y') ?? 'N/A' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-slate-400">
                             <button class="hover:text-primary transition-colors">
                                 <span class="material-symbols-outlined">more_vert</span>

@@ -44,12 +44,12 @@
                         <div class="space-y-2">
                             <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Category</label>
 <div class="relative">
-                                    <select class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="category" required>
+                                    <select class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="menu_id" required>
                                         <option disabled="" selected="" value="">Select Category</option>
 
 
                                         @foreach ($items as $item)
-                                            <option value="{{ $item->category }}">{{ $item->category }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->category }}</option>
                                         @endforeach
 
 

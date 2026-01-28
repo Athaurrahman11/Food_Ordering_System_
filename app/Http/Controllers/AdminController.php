@@ -160,7 +160,18 @@ class AdminController extends Controller
     {
         $food = new Food;
         $food->name = $request->input('name'); // Assuming input name is 'name'
-        $food->category = $request->input('category');
+        
+        $menuId = $request->input('menu_id');
+        $food->menu_id = $menuId;
+        
+        // Populate legacy category string from the Menu model
+        $menu = Menu::find($menuId);
+        if ($menu) {
+            $food->category = $menu->category;
+        } else {
+             // Fallback if somehow menu not found, though constraint should prevent this
+             $food->category = 'Uncategorized'; 
+        }
         $food->price = $request->input('price');
         $food->stock = $request->input('stock');
         
@@ -187,7 +198,18 @@ class AdminController extends Controller
     {
         $food = Food::findOrFail($id);
         $food->name = $request->input('name');
-        $food->category = $request->input('category');
+        
+        $menuId = $request->input('menu_id');
+        $food->menu_id = $menuId;
+        
+        // Populate legacy category string from the Menu model
+        $menu = Menu::find($menuId);
+        if ($menu) {
+            $food->category = $menu->category;
+        } else {
+             // Fallback if somehow menu not found, though constraint should prevent this
+             $food->category = 'Uncategorized'; 
+        }
         $food->price = $request->input('price');
         $food->stock = $request->input('stock');
 
