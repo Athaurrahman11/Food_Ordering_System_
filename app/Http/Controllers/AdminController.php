@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Food;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 
@@ -12,7 +13,8 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function  index()  {
-        return view('admin.dashboard');
+        $orders = Order::latest()->take(5)->get();
+        return view('admin.dashboard', compact('orders'));
     }
 
     public function menu()  {
@@ -84,7 +86,19 @@ class AdminController extends Controller
     }
 
     public function orders() {
-        return view('admin.orders');
+        $orders = Order::latest()->paginate(10);
+        $total_orders = Order::count();
+        $pending_orders = Order::where('status', 'Pending')->count();
+        $in_progress_orders = Order::where('status', 'Preparing')->count();
+        return view('admin.orders', compact('orders', 'total_orders', 'pending_orders', 'in_progress_orders'));
+    }
+
+    public function update_order_status($id, $status) {
+        $order = Order::findOrFail($id);
+        $order->status = $status;
+        $order->save();
+        toastr()->closeButton(true)->success('Order status updated to ' . $status);
+        return back();
     }
 
     public function customers() {

@@ -23,6 +23,7 @@ route::get('food',[AdminController::class,'food'])->name('food_management');
 
 route::post('update_menu/{id}',[AdminController::class,'update_menu']);
 route::get('customers',[AdminController::class,'customers']);
+route::get('order_status/{id}/{status}',[AdminController::class,'update_order_status']);
 
 route::post('store_food',[AdminController::class,'store_food']);
 route::get('edit_food/{id}',[AdminController::class,'edit_food']);
