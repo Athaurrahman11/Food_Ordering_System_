@@ -162,118 +162,53 @@
                 <h3 class="font-bold text-lg">Recent Orders</h3>
                 <button class="text-primary text-sm font-bold hover:underline">View All Orders</button>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 text-xs uppercase tracking-wider font-semibold">
-                        <tr>
-                            <th class="px-6 py-3">Order ID</th>
-                            <th class="px-6 py-3">Customer</th>
-                            <th class="px-6 py-3">Status</th>
-                            <th class="px-6 py-3">Price</th>
-                            <th class="px-6 py-3">Date</th>
-                            <th class="px-6 py-3 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700 text-sm">
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
-                            <td class="px-6 py-4 font-mono font-medium">#ORD-3942</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="size-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">JD</div>
-                                    <span>Jane Doe</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
-                                    Delivered
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 font-semibold">$34.50</td>
-                            <td class="px-6 py-4 text-slate-500">2 mins ago</td>
-                            <td class="px-6 py-4 text-right">
-                             <button class="mx-4 rounded-md text-base font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 p-3">
-                                        Delivered
-                                    </button>
-
-                                    <button class="mx-4 rounded-md text-base font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary p-3">
-                                        Preparing
-                                    </button>
-
-                                    <button class="mx-4 rounded-md text-base font-medium bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 p-3">
-                                        Pending
-                                    </button>
-</button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
-                            <td class="px-6 py-4 font-mono font-medium">#ORD-3941</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="size-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">MK</div>
-                                    <span>Michael K.</span>
-                                </div>
-                            </td>
-
-                            
-
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary">
-                                    Preparing
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 font-semibold">$12.20</td>
-                            <td class="px-6 py-4 text-slate-500">15 mins ago</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-slate-400 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">more_vert</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
-                            <td class="px-6 py-4 font-mono font-medium">#ORD-3940</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="size-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">SL</div>
-                                    <span>Sarah Lee</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
-                                    Pending
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 font-semibold">$89.15</td>
-                            <td class="px-6 py-4 text-slate-500">42 mins ago</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-slate-400 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">more_vert</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
-                            <td class="px-6 py-4 font-mono font-medium">#ORD-3939</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="size-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">RB</div>
-                                    <span>Robert B.</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
-                                    Delivered
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 font-semibold">$45.00</td>
-                            <td class="px-6 py-4 text-slate-500">1 hour ago</td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-slate-400 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">more_vert</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-900/50 text-slate-500 text-xs uppercase tracking-wider font-semibold">
+                            <tr>
+                                <th class="px-6 py-3">Order ID</th>
+                                <th class="px-6 py-3">Customer</th>
+                                <th class="px-6 py-3">Status</th>
+                                <th class="px-6 py-3">Price</th>
+                                <th class="px-6 py-3">Date</th>
+                                <th class="px-6 py-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-700 text-sm">
+                            @foreach($orders as $order)
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/20 transition-colors">
+                                <td class="px-6 py-4 font-mono font-medium">#ORD-{{ $order->id }}</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div class="size-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">{{ substr($order->customer_name, 0, 1) }}</div>
+                                        <span>{{ $order->customer_name }}</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                        {{ $order->status == 'Delivered' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 
+                                           ($order->status == 'Pending' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' : 
+                                           'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400') }}">
+                                        {{ $order->status }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 font-semibold">${{ $order->price }}</td>
+                                <td class="px-6 py-4 text-slate-500">{{ $order->created_at?->diffForHumans() ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="{{ url('orders') }}" class="text-slate-400 hover:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @if($orders->isEmpty())
+                            <tr>
+                                <td colspan="6" class="px-6 py-4 text-center text-slate-500">No recent orders found.</td>
+                            </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </main>

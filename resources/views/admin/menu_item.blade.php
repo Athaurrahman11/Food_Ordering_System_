@@ -16,7 +16,7 @@
 
         <div class="max-w-3xl mx-auto">
             <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
-                <form action="{{ uri('menu_store') }}" class="p-8 space-y-8" method="post" enctype="multipart/form-data">
+                <form action="{{ url('menu_store') }}" class="p-8 space-y-8" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="space-y-3">
                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Menu Image</label>
@@ -49,13 +49,13 @@
                         </div>
 
                     </div>
-                    <!-- Action Buttons -->
+
                     <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-100 dark:border-gray-800">
-                        <a href="{{ uri('menu') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">
+                        <a href="{{ url('menu') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">
                             Cancel
                         </a>
                         <button class="px-8 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary/90 transition-colors flex items-center gap-2" type="submit">
-                            <a href="{{ uri('menu_store') }}" class="material-symbols-outlined text-sm" >save</a>
+                            <i class="material-symbols-outlined text-sm" >save</i>
                             Save Item
                         </button>
                     </div>
