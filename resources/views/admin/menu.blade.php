@@ -10,7 +10,7 @@
             </div>
             <div class="flex items-center gap-3">
 
-                <a href="{{ uri('add_menu') }}" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer" >
+                <a href="{{ url('add_menu') }}" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer" >
                     <span class="material-symbols-outlined text-sm">add</span>
                     Add Item for menu
                 </a>
@@ -33,10 +33,10 @@
                 <div class="absolute inset-0 bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-500" style="background-image: url('{{ asset('Menu_items/' . $menuitem->image) }}');"></div>
                 <div class="absolute top-3 right-3 flex gap-2">
                     <button class="p-2 bg-white/90 dark:bg-black/60 rounded-lg text-primary backdrop-blur-sm hover:bg-primary hover:text-white transition-colors">
-                        <a href="{{ uri('edit_menu/'.$menuitem->id) }}" class="material-symbols-outlined text-sm filled-icon">edit</a>
+                        <a href="{{ url('edit_menu/'.$menuitem->id) }}" class="material-symbols-outlined text-sm filled-icon">edit</a>
                     </button>
                     <button class="p-2 bg-white/90 dark:bg-black/60 rounded-lg text-red-500 backdrop-blur-sm hover:bg-red-500 hover:text-white transition-colors">
-                        <a href="{{ uri('delete_menu/'.$menuitem->id) }}" class="delete-btn material-symbols-outlined text-sm filled-icon ">delete</a>
+                        <a href="{{ url('delete_menu/'.$menuitem->id) }}" class="delete-btn material-symbols-outlined text-sm filled-icon ">delete</a>
                     </button>
                 </div>
 
@@ -64,7 +64,7 @@
 
         <button class="group border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 flex flex-col items-center justify-center gap-4 hover:border-primary hover:bg-primary/5 transition-all">
             <div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-                <a href="{{ uri('add_menu') }}" class="material-symbols-outlined text-2xl">add_circle</a>
+                <a href="{{ url('add_menu') }}" class="material-symbols-outlined text-2xl">add_circle</a>
             </div>
             <div class="text-center">
                 <p class="font-bold text-slate-700 dark:text-slate-300">Add New Food Item</p>

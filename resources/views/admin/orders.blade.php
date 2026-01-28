@@ -2,14 +2,14 @@
 
 @section('content')
 
-<!-- Main Content -->
+
 <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-    <!-- TopNavBar -->
 
 
 
-    <!-- Dashboard Content -->
+
+
     <div class="p-8 overflow-y-auto">
         <div>
             <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Order Management</h2>
@@ -46,11 +46,11 @@
             </div>
         </div>
 
-        <!-- Stats Grid -->
+
         <div>
 
 
-            <!-- Recent Orders Table -->
+
             <div class="mt-8 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <h3 class="font-bold text-lg">All Orders</h3>

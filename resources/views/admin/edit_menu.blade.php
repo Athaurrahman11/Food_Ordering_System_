@@ -16,7 +16,7 @@
 
         <div class="max-w-3xl mx-auto">
             <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
-                <form action="{{ uri('menu_store') }}" class="p-8 space-y-8" method="post" enctype="multipart/form-data">
+                <form action="{{ url('update_menu/'.$menu_item->id) }}" class="p-8 space-y-8" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="space-y-3">
                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Menu Image</label>

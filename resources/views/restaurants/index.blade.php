@@ -17,8 +17,9 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="fw-bold m-0">What's on your mind?</h4>
             <div class="d-flex gap-2">
-                <button class="btn btn-light btn-sm rounded-circle border shadow-sm">←</button>
-                <button class="btn btn-light btn-sm rounded-circle border shadow-sm">→</button>
+                 <a href="{{ url('add_restaurant') }}" class="btn btn-orange rounded-3 px-3 py-2 fw-bold d-flex align-items-center gap-2 text-white">
+                    <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span> Add Restaurant
+                </a>
             </div>
         </div>
         <div class="d-flex gap-4 overflow-auto pb-2 no-scrollbar text-center">
@@ -60,27 +61,31 @@
         </div>
 
         <div class="row g-4">
-            @for($i = 0; $i < 8; $i++)
+            @foreach($restaurants as $restaurant)
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card card-restaurant shadow-sm position-relative h-100">
-                    <span class="status-badge bg-white text-orange shadow-sm">Free Delivery</span>
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400" class="card-img-top">
+                    <span class="status-badge bg-white text-orange shadow-sm">{{ $restaurant->status }}</span>
+                    <img src="{{ asset('Restaurant_images/' . $restaurant->image) }}" class="card-img-top" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400'">
                     <div class="card-body p-3">
-                        <h6 class="fw-bold mb-1">The Burger Joint</h6>
-                        <p class="text-muted small mb-2">American • Burgers • $$</p>
-                        <div class="d-flex justify-content-between align-items-center pt-1">
-                            <span class="fw-bold small">⭐ 4.8</span>
-                            <span class="text-muted small">25-35 mins</span>
+                        <h6 class="fw-bold mb-1">{{ $restaurant->name }}</h6>
+                        <p class="text-muted small mb-2">{{ Str::limit($restaurant->description, 30) }} • $$</p>
+                        <div class="d-flex justify-content-between align-items-center pt-1 mb-3">
+                            <span class="fw-bold small">⭐ {{ $restaurant->rating }}</span>
+                            <span class="text-muted small">{{ $restaurant->delivery_time }}</span>
+                        </div>
+                        <div class="d-flex gap-2 pt-2 border-top">
+                            <a href="{{ url('edit_restaurant/'.$restaurant->id) }}" class="btn btn-sm btn-light flex-grow-1 fw-bold">Edit</a>
+                            <a href="{{ url('delete_restaurant/'.$restaurant->id) }}" class="btn btn-sm btn-light text-danger"><span class="material-symbols-outlined" style="font-size: 1.2rem;">delete</span></a>
                         </div>
                     </div>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 
     <div class="text-center mt-5 py-4">
-        <p class="text-muted small fw-bold mb-2">Showing 8 of 142 restaurants</p>
+        <p class="text-muted small fw-bold mb-2">Showing {{ count($restaurants) }} restaurants</p>
         <div class="progress mx-auto mb-4" style="height: 4px; width: 200px; background-color: #eee;">
             <div class="progress-bar bg-orange" style="width: 25%"></div>
         </div>
