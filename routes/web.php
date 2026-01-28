@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\FoodController;
 
 route::get('admin_dashboard',[AdminController::class,'index']);
 
@@ -22,11 +23,6 @@ route::get('add_food',[AdminController::class,'add_food']);
 route::get('food',[AdminController::class,'food']);
 
 route::post('update_menu/{id}',[AdminController::class,'update_menu']);
-
-
-
-
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -48,3 +44,17 @@ route::get('home',function(){
 route::get('ind',function(){
     return view('restaurants.index');
 });
+
+// Cart Action
+Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add');
+
+Route::get('/login', function () { return view('auth.login'); })->name('login');
+Route::get('/register', function () { return view('auth.register'); })->name('register');
+
+// -------------------------------------------------------------------------
+// Page Routes
+Route::get('/', function () { return view('user.home'); })->name('home');
+Route::get('/shop', [FoodController::class, 'index'])->name('shop');
+Route::get('/about', function () { return view('user.about'); })->name('about');
+Route::get('/tracking', function () { return view('user.tracking'); })->name('tracking');
+Route::get('/contact', function () { return view('user.contact'); })->name('contact');
