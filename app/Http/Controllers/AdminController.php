@@ -14,7 +14,25 @@ class AdminController extends Controller
 {
     public function  index()  {
         $orders = Order::latest()->take(5)->get();
-        return view('admin.dashboard', compact('orders'));
+        $total_revenue = Order::sum('price');
+        $total_orders = Order::count();
+        $total_food_items = Food::count();
+        $total_menu_items = Menu::count();
+
+        // Calculate Category Distribution
+        $top_categories = Food::selectRaw('category, count(*) as count')
+            ->groupBy('category')
+            ->orderByDesc('count')
+            ->take(3)
+            ->get();
+        
+        // Calculate percentages
+        $total_food = $total_food_items > 0 ? $total_food_items : 1;
+        foreach($top_categories as $cat) {
+            $cat->percentage = round(($cat->count / $total_food) * 100);
+        }
+
+        return view('admin.dashboard', compact('orders', 'total_revenue', 'total_orders', 'total_food_items', 'total_menu_items', 'top_categories'));
     }
 
     public function menu()  {
@@ -102,7 +120,11 @@ class AdminController extends Controller
     }
 
     public function customers() {
-        return view('admin.customers');
+        $customers = \App\Models\User::paginate(10);
+        $total_customers = \App\Models\User::count();
+        $new_customers_this_month = \App\Models\User::where('created_at', '>=', now()->subMonth())->count();
+
+        return view('admin.customers', compact('customers', 'total_customers', 'new_customers_this_month'));
     }
 
     public function food(Request $request) {
