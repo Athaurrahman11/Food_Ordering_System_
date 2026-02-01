@@ -181,7 +181,7 @@
             </a>
         </div>
     </section>
-
+    
     <!-- Popular Dishes -->
     <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -502,7 +502,7 @@
              </div>
         </div>
     </section>
-
+    
     @include('partials.footer')
 
 </body>
