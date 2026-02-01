@@ -73,19 +73,30 @@
 
       <!-- Actions -->
       <div class="flex items-center gap-4">
-        <a href="{{ route('cart.view') }}" class="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f48c25] transition-colors shadow-lg shadow-black/10">
-          <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
-          @if(session('cart'))
-          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white">
-            {{ count(session('cart')) }}
-          </span>
-          @endif
-        </a>
+        
         @if (Route::has('login'))
         @auth
-        <a href="{{ url('/redirect') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">Dashboard</a>
+        <h2 class="text-base lg:text-base font-black text-slate-900">Welcome, <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">{{ Auth::user()->name }}</span></h2>
+        <a href="{{ route('cart.view') }}" class="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f48c25] transition-colors shadow-lg shadow-black/10">
+          <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+          @auth
+          @php 
+            $count = \App\Models\Cart::where('user_id', Auth::id())->count();
+          @endphp
+          @if($count > 0)
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white">
+            {{ $count }}
+          </span>
+          @endif
+          @endauth
+        </a>
+        <form action="{{ route('logout') }}" method="post">
+          @csrf
+          <input type="submit"  class="lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30" value="Logout">
+        </form>
         @else
         <a href="{{ route('login') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">Sign In</a>
+        <a href="{{ route('register') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">Register</a>
         @endauth
         @endif
       </div>

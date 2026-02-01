@@ -62,9 +62,11 @@ Route::get('/tracking', function () { return view('home.tracking'); })->name('tr
 Route::get('/contact', function () { return view('home.contact'); })->name('contact');
 
 // Cart Actions (Session Based)
-Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add')->middleware(['auth','verified']);
 Route::get('/cart', [FoodController::class, 'viewCart'])->name('cart.view');
 Route::get('/cart-remove/{id}', [FoodController::class, 'removeFromCart'])->name('cart.remove');
+Route::get('/cart-increment/{id}', [FoodController::class, 'incrementCart'])->name('cart.increment');
+Route::get('/cart-decrement/{id}', [FoodController::class, 'decrementCart'])->name('cart.decrement');
 Route::get('/checkout', [FoodController::class, 'checkout'])->name('checkout');
 Route::post('/place-order', [FoodController::class, 'placeOrder'])->name('place.order');
 

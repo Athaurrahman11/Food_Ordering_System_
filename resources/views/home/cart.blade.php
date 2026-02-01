@@ -13,21 +13,21 @@
         <div class="w-44 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
     </div>
 
-    @if(session('cart') && count(session('cart')) > 0)
+    @if($cartItems->count() > 0)
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         
         <!-- Cart Items List -->
         <div class="lg:col-span-2 space-y-6">
             @php $total = 0; @endphp
-            @foreach(session('cart') as $id => $details)
-            @php $total += $details['price'] * $details['quantity']; @endphp
+            @foreach($cartItems as $item)
+            @php $total += $item->food->price * $item->quantity; @endphp
             <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-12 items-center gap-6 group hover:border-[#f48c25]/30 transition-colors">
                 
                 <!-- Image -->
                 <div class="md:col-span-2 flex justify-center md:justify-start">
                     <div class="w-24 h-24 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0 overflow-hidden">
-                        @if(isset($details['image']) && $details['image'])
-                             <img src="{{ asset('Food_Items/'.$details['image']) }}" class="w-full h-full object-cover">
+                        @if($item->food->image)
+                             <img src="{{ Str::startsWith($item->food->image, ['http', 'https']) ? $item->food->image : asset('Food_Items/'.$item->food->image) }}" class="w-full h-full object-cover">
                         @else
                              <span class="material-symbols-outlined text-4xl">lunch_dining</span>
                         @endif
@@ -36,28 +36,33 @@
 
                 <!-- Info -->
                 <div class="md:col-span-4 text-center md:text-left">
-                    <h3 class="font-black text-xl text-slate-900 mb-1 truncate" title="{{ $details['name'] }}">{{ $details['name'] }}</h3>
-                    <p class="text-[#f48c25] font-bold">${{ $details['price'] }}</p>
+                    <h3 class="font-black text-xl text-slate-900 mb-1 truncate" title="{{ $item->food->name }}">{{ $item->food->name }}</h3>
+                    <p class="text-[#f48c25] font-bold">${{ $item->food->price }}</p>
                 </div>
 
                 <!-- Qty -->
                 <div class="md:col-span-3 flex justify-center md:justify-start">
-                    <div class="flex items-center gap-4 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Qty</span>
-                        <span class="font-black text-slate-900">{{ $details['quantity'] }}</span>
+                    <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
+                        <a href="{{ route('cart.decrement', $item->id) }}" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
+                            <span class="font-bold text-lg leading-none mb-0.5">-</span>
+                        </a>
+                        <span class="font-black text-slate-900 w-6 text-center">{{ $item->quantity }}</span>
+                        <a href="{{ route('cart.increment', $item->id) }}" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
+                            <span class="font-bold text-lg leading-none mb-0.5">+</span>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Total -->
                 <div class="md:col-span-2 text-center md:text-left">
                     <div class="font-black text-xl text-slate-900">
-                        ${{ $details['price'] * $details['quantity'] }}
+                        ${{ $item->food->price * $item->quantity }}
                     </div>
                 </div>
 
                 <!-- Remove -->
                 <div class="md:col-span-1 flex justify-center md:justify-end">
-                    <a href="{{ route('cart.remove', $id) }}" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove">
+                    <a href="{{ route('cart.remove', $item->id) }}" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove">
                         <span class="material-symbols-outlined text-sm">delete</span>
                     </a>
                 </div>

@@ -13,7 +13,7 @@
         <div class="w-24 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
     </div>
 
-    @if(session('cart') && count(session('cart')) > 0)
+    @if($cartItems->count() > 0)
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         <!-- Left Side: Address Form -->
@@ -93,27 +93,27 @@
                 
                 <div class="max-h-[300px] overflow-y-auto pr-2 space-y-4 mb-6 custom-scrollbar">
                     @php $total = 0; @endphp
-                    @foreach(session('cart') as $id => $details)
-                    @php $total += $details['price'] * $details['quantity']; @endphp
+                    @foreach($cartItems as $item)
+                    @php $total += $item->food->price * $item->quantity; @endphp
                     <div class="flex items-center gap-4 py-2">
                          <div class="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0 overflow-hidden">
-                            @if(isset($details['image']) && $details['image'])
-                                    <img src="{{ asset('Food_Items/'.$details['image']) }}" class="w-full h-full object-cover">
+                            @if($item->food->image)
+                                    <img src="{{ Str::startsWith($item->food->image, ['http', 'https']) ? $item->food->image : asset('Food_Items/'.$item->food->image) }}" class="w-full h-full object-cover">
                             @else
                                     <span class="material-symbols-outlined text-2xl">lunch_dining</span>
                             @endif
                         </div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="font-bold text-slate-900 text-sm truncate">{{ $details['name'] }}</h4>
-                            <p class="text-xs text-slate-500">Qty: {{ $details['quantity'] }}</p>
+                            <h4 class="font-bold text-slate-900 text-sm truncate">{{ $item->food->name }}</h4>
+                            <p class="text-xs text-slate-500">Qty: {{ $item->quantity }}</p>
                         </div>
-                        <span class="font-black text-slate-900 text-sm">${{ $details['price'] * $details['quantity'] }}</span>
+                        <span class="font-black text-slate-900 text-sm">${{ $item->food->price * $item->quantity }}</span>
                     </div>
                     @endforeach
                 </div>
 
                 @php
-                    $shipping = $total > 1000 ? 0 : 50;
+                    $shipping = $total > 1000 ? 0 : 500;
                 @endphp
 
                 <div class="space-y-3 mb-8 pt-6 border-t border-slate-100">

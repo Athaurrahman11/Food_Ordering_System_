@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Food;
 use App\Models\Menu;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class FoodController extends Controller
 {
@@ -30,55 +33,98 @@ class FoodController extends Controller
         return view('home.index', compact('featured_foods', 'food_items'));
     }
 
-    // Handle adding items to cart (Session-based)
     public function addToCart(Request $request) {
-        $cart = session()->get('cart', []);
-        $id = $request->id;
+       
 
-        // Check if item exists in cart
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        $user_id = FacadesAuth::user()->id;
+        $food_id = $request->id;
+
+        $cartItem = Cart::where('user_id', $user_id)->where('food_id', $food_id)->first();
+
+        if($cartItem) {
+            $cartItem->quantity += 1;
+            $cartItem->save();
         } else {
-            $cart[$id] = [
-                "name" => $request->name,
-                "price" => $request->price,
-                "quantity" => 1
-            ];
-        }
-
-        session()->put('cart', $cart);
-
-        if ($request->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Item added to cart!',
-                'cartCount' => count($cart)
+            Cart::create([
+                'user_id' => $user_id,
+                'food_id' => $food_id,
+                'quantity' => 1
             ]);
         }
 
         return redirect()->back()->with('success', 'Item added to cart!');
     }
+
     public function viewCart() {
-        return view('home.cart');
+        
+        
+        $user_id = FacadesAuth::user()->id;
+        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+        
+        return view('home.cart', compact('cartItems'));
+    }
+
+    public function incrementCart($id) {
+        if(\Illuminate\Support\Facades\Auth::check()) {
+            $user_id = \Illuminate\Support\Facades\Auth::id();
+            $cart = \App\Models\Cart::find($id);
+            if($cart && $cart->user_id == $user_id) {
+                $cart->quantity += 1;
+                $cart->save();
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function decrementCart($id) {
+        if(\Illuminate\Support\Facades\Auth::check()) {
+            $user_id = \Illuminate\Support\Facades\Auth::id();
+            $cart = \App\Models\Cart::find($id);
+            if($cart && $cart->user_id == $user_id) {
+                if($cart->quantity > 1) {
+                    $cart->quantity -= 1;
+                    $cart->save();
+                } else {
+                    // Option: Remove if matches 1? Or just do nothing? 
+                    // User asked for "-" button, usually means decrement. 
+                    // To remove, they can use the remove button.
+                    // Keeping it at 1 minimum.
+                }
+            }
+        }
+        return redirect()->back();
     }
 
     public function removeFromCart($id) {
-        $cart = session()->get('cart');
-        if(isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-        }
+            $user_id = FacadesAuth::user()->id;
+            
+            $cart =Cart::find($id);
+            if($cart && $cart->user_id == $user_id) {
+                $cart->delete();
+            }
+
         return redirect()->back()->with('success', 'Item removed correctly');
     }
 
     public function checkout() {
-        if(!session('cart') || count(session('cart')) == 0) {
+        if(!\Illuminate\Support\Facades\Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $user_id = \Illuminate\Support\Facades\Auth::id();
+        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+
+        if($cartItems->count() == 0) {
             return redirect()->route('shop');
         }
-        return view('home.checkout');
+        return view('home.checkout', compact('cartItems'));
     }
 
     public function placeOrder(Request $request) {
+        if(!\Illuminate\Support\Facades\Auth::check()) {
+            return redirect()->route('login');
+        }
+
         // Validate request
         $request->validate([
             'name' => 'required|string|max:255',
@@ -90,8 +136,9 @@ class FoodController extends Controller
         // Here you would normally save the order to the DB
         // For example: Order::create([...]);
 
-        // Clear the cart
-        session()->forget('cart');
+        // Clear the cart from DB
+        $user_id = \Illuminate\Support\Facades\Auth::id();
+        \App\Models\Cart::where('user_id', $user_id)->delete();
 
         return redirect()->route('user.home')->with('success', 'Order placed successfully! Thank you for ordering.');
     }
