@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Track Order - FoodieSystem</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
-</head>
-<body class="bg-[#fcfaf8] min-h-screen pb-12">
-        @if(session('success'))
-        <div id="success-popup" class="fixed top-10 left-1/2 -translate-x-1/2 z-50 bg-[#1c140d] text-white px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-4 animate-bounce">
-            <div class="bg-[#f48c25] p-1 rounded-full">
-                <span class="material-symbols-outlined text-sm">check</span>
-            </div>
-            <p class="font-bold text-sm">{{ session('success') }}</p>
-            <button onclick="document.getElementById('success-popup').remove()" class="ml-4 opacity-50 hover:opacity-100">
-                <span class="material-symbols-outlined text-sm">close</span>
-            </button>
-        </div>
-    @endif
+@extends('home.layouts.app')
 
-    <header class="px-6 py-6 lg:px-20 flex justify-between items-center bg-white border-b border-slate-100 mb-10">
-        <div class="flex items-center gap-2">
-            <div class="bg-[#f48c25] p-2 rounded-xl text-white shadow-lg shadow-[#f48c25]/30">
-                <span class="material-symbols-outlined">restaurant</span>
-            </div>
-            <span class="text-xl font-bold text-[#1c140d]">FoodieSystem</span>
-        </div>
-        <a href="{{ route('user.home') }}" class="text-sm font-bold text-slate-400 hover:text-[#f48c25] transition-colors flex items-center gap-1">
-            <span class="material-symbols-outlined text-base">arrow_back</span> Back to Home
-        </a>
-    </header>
+@section('content')
 
     <main class="max-w-[500px] mx-auto px-6">
         <div class="bg-[#1c140d] rounded-[2.5rem] p-8 text-white mb-6 shadow-2xl shadow-slate-900/20 relative overflow-hidden">
@@ -101,5 +70,4 @@
             </a>
         </div>
     </main>
-</body>
-</html>
+@endsection

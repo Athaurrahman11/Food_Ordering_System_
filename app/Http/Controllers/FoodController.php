@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
@@ -22,8 +24,10 @@ class FoodController extends Controller
 
     // Show Home Page with Featured Items
     public function home() {
-        $featured_foods = \App\Models\Food::take(6)->get(); // Fetch 6 items for display
-        return view('home.index', compact('featured_foods'));
+        $featured_foods = Menu::take(6)->get(); 
+        $food_items=Food::take(6)->get();
+        
+        return view('home.index', compact('featured_foods', 'food_items'));
     }
 
     // Handle adding items to cart (Session-based)
@@ -55,7 +59,7 @@ class FoodController extends Controller
         return redirect()->back()->with('success', 'Item added to cart!');
     }
     public function viewCart() {
-        return view('user.cart'); // Not moved yet
+        return view('home.cart');
     }
 
     public function removeFromCart($id) {
