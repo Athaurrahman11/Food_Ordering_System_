@@ -13,7 +13,7 @@ use App\Http\Controllers\FoodController;
 */
 
 // Admin Routes
-route::get('admin_dashboard',[AdminController::class,'index']);
+route::get('admin_dashboard',[AdminController::class,'index'])->name('admin_dashboard')->middleware(['auth','verified']);
 route::get('menu',[AdminController::class,'menu'])->name('menu');
 route::get('add_menu',[AdminController::class,'menu_add']);
 route::post('menu_store',[AdminController::class,'menu_store']);
@@ -30,9 +30,7 @@ route::post('update_menu/{id}',[AdminController::class,'update_menu']);
 route::get('customers',[AdminController::class,'customers']);
 
 // User Dashboard (Authenticated)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/homepage', [FoodController::class, 'home'])->middleware(['auth', 'verified','access_middleware'])->name('dashboard');
 
 // Profile Routes
 Route::middleware('auth')->group(function () {

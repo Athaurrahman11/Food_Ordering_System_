@@ -91,10 +91,13 @@
 
 </nav>
 <div class="p-4 border-t border-slate-200 dark:border-border-dark">
-<button class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm">
-<span class="material-symbols-outlined text-sm">logout</span>
-                    Logout
-                </button>
+<form action="{{ route('logout') }}" method="post">
+    @csrf
+    <input type="submit" class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm" value="LOGOUT">
+    
+                    
+               
+</form>
 
 
               </div>
