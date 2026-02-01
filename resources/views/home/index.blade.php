@@ -1,82 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Foodie - Delicious Food Delivered</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <style>
-        body { font-family: 'Outfit', sans-serif; }
-        .font-body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
+@extends('home.layouts.app')
 
-        .glass-dark {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
-</head>
-<body class="bg-[#fffbf7] text-slate-900 overflow-x-hidden selection:bg-[#f48c25] selection:text-white">
+@section('content')
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-[100] transition-all duration-300 px-6 py-4 lg:px-12 top-0">
-        <div class="glass max-w-7xl mx-auto rounded-full px-6 py-3 flex justify-between items-center shadow-lg shadow-black/5">
-            <!-- Logo -->
-            <a href="{{ route('user.home') }}" class="flex items-center gap-2 group">
-                <div class="bg-gradient-to-br from-[#f48c25] to-orange-600 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-[#f48c25]/30 shadow-lg group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">restaurant</span>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-slate-800">Foodie<span class="text-[#f48c25]">.</span></span>
-            </a>
-
-            <!-- Links -->
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-500">
-                <a href="{{ route('user.home') }}" class="text-[#f48c25] font-bold">Home</a>
-                <a href="{{ route('shop') }}" class="hover:text-[#f48c25] transition-colors">Menu</a>
-                <a href="{{ route('about') }}" class="hover:text-[#f48c25] transition-colors">Story</a>
-                <a href="{{ route('contact') }}" class="hover:text-[#f48c25] transition-colors">Contact</a>
-            </div>
-
-            <!-- Actions -->
-            <div class="flex items-center gap-4">
-                 <a href="{{ route('cart.view') }}" class="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f48c25] transition-colors shadow-lg shadow-black/10">
-                    <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
-                    @if(session('cart'))
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white">
-                        {{ count(session('cart')) }}
-                    </span>
-                    @endif
-                </a>
-                 @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/redirect') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">Sign In</a>
-                    @endauth
-                @endif
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <!-- Background Image -->
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-transparent"></div>
@@ -84,7 +10,6 @@
 
         <div class="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-20 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            <!-- Text Content -->
             <div class="text-center lg:text-left space-y-6">
                 <span class="inline-block px-4 py-2 rounded-full bg-[#f48c25] text-white text-xs font-bold uppercase tracking-widest shadow-lg shadow-orange-500/30 animate-pulse">
                     Hungry? We got you.
@@ -120,14 +45,11 @@
                 </div>
             </div>
 
-            <!-- Hero Image/Card (Optional Float) -->
             <div class="hidden lg:block relative">
-                 <!-- Floating Elements - Abstract representation of speed/taste -->
             </div>
         </div>
     </section>
 
-    <!-- Featured Categories -->
     <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto">
         <div class="text-center mb-16">
             <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">What's on your mind?</span>
@@ -135,91 +57,53 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <!-- Pizza -->
-            <a href="{{ route('shop') }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
+           
+            @foreach ($featured_foods as $featured_food)
+                 <a href="{{ route('shop', ['category' => $featured_food->category]) }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
                 <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+                    <img src="{{ asset('Menu_items/'.$featured_food->image) }}" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">Pizza</h3>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">Order Now</span>
-            </a>
+                <h3 class="font-extrabold text-lg text-slate-800 mb-1">{{ $featured_food->category }}</h3>
+                <p class="text-slate-500 font-body text-sm leading-relaxed">{{ $featured_food->description }}</p>
+                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity  group-hover:translate-y-0">Order Now</span>
+                </a>
+            @endforeach
             
-            <!-- Burgers -->
-            <a href="{{ route('shop') }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">Burgers</h3>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">Order Now</span>
-            </a>
-
-            <!-- Chicken -->
-            <a href="{{ route('shop') }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">Chicken</h3>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">Order Now</span>
-            </a>
-
-             <!-- Desserts -->
-             <a href="{{ route('shop') }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="https://images.unsplash.com/photo-1563729768-b692965d7bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">Desserts</h3>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">Order Now</span>
-            </a>
-
-             <!-- Drinks -->
-             <a href="{{ route('shop') }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">Drinks</h3>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">Order Now</span>
-            </a>
+         
+           
         </div>
     </section>
     
-    <!-- Popular Dishes -->
     <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div class="text-center md:text-left">
-                <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Menu Favorites</span>
+                <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Food Items</span>
                 <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Popular <span class="text-[#f48c25]">Dishes</span></h2>
             </div>
             <a href="{{ route('shop') }}" class="group flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#f48c25] transition-colors">
-                View Full Menu
+                View Full Food Items
                 <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($featured_foods as $food)
-            @php
-                $isVeg = \Illuminate\Support\Str::contains(strtolower($food->category), ['salad', 'vegan', 'veg', 'drink', 'beverage', 'dessert', 'coffee', 'tea']);
-            @endphp
-            <div class="bg-white rounded-[2.5rem] p-4 shadow-sm border border-slate-100 hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.15)] hover:border-[#f48c25]/30 hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full relative">
+            @foreach($food_items as $food)
+          
+            <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border border-slate-100 hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.15)] hover:border-[#f48c25]/30 hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full relative">
                 
-                <!-- Image Area -->
                 <div class="relative h-60 rounded-[2rem] overflow-hidden mb-5 flex-shrink-0 bg-slate-50">
-                    <!-- Badges Container -->
                     <div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
-                         <!-- Veg/Non-Veg Badge -->
-                        <span class="bg-white/90 backdrop-blur text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider flex items-center gap-1 w-max border {{ $isVeg ? 'border-green-500 text-green-600' : 'border-red-500 text-red-600' }}">
-                            <span class="w-2 h-2 rounded-full {{ $isVeg ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                            {{ $isVeg ? 'VEG' : 'NON-VEG' }}
+                        <span class="bg-white/90 backdrop-blur text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider flex items-center gap-1 w-max border {{ $food->stock ? 'border-green-500 text-green-600' : 'border-red-500 text-red-600' }}">
+                            <span class="w-2 h-2 rounded-full {{ $food->stock ? 'bg-green-500' : 'bg-red-500' }}"></span>
+                            Stock: {{ $food->stock }}
                         </span>
                     </div>
                     
-                    <img src="{{ asset($food->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="{{ asset('Food_Items/'.$food->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     
-                    <!-- Overlay Gradient -->
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60"></div>
                 </div>
                 
-                <!-- Content -->
                 <div class="px-4 pb-4 flex flex-col flex-1">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="font-black text-xl text-slate-900 leading-tight group-hover:text-[#f48c25] transition-colors line-clamp-1">{{ $food->title }}</h3>
@@ -309,49 +193,7 @@
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto">
-         <div class="bg-[#f48c25] rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden">
-             <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
-             
-             <div class="relative z-10">
-                 <span class="text-white/80 font-bold uppercase tracking-widest text-xs mb-3 block">Easy Steps</span>
-                 <h2 class="text-4xl lg:text-5xl font-black text-white mb-16">How It Works</h2>
-                 
-                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                     <!-- Step 1 -->
-                     <div class="relative z-10 group">
-                         <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition-transform">
-                             <span class="material-symbols-outlined text-4xl text-[#f48c25]">restaurant_menu</span>
-                         </div>
-                         <h3 class="font-black text-2xl text-white mb-2">1. Browse Menu</h3>
-                         <p class="text-white/80 font-body text-sm">Explore our diverse menu and choose your favorite dishes.</p>
-                     </div>
-                     
-                     <!-- Step 2 -->
-                     <div class="relative z-10 group">
-                         <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition-transform">
-                             <span class="material-symbols-outlined text-4xl text-[#f48c25]">shopping_cart</span>
-                         </div>
-                         <h3 class="font-black text-2xl text-white mb-2">2. Add to Cart</h3>
-                         <p class="text-white/80 font-body text-sm">Customize your order and proceed to secure checkout.</p>
-                     </div>
-                     
-                     <!-- Step 3 -->
-                     <div class="relative z-10 group">
-                         <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition-transform">
-                             <span class="material-symbols-outlined text-4xl text-[#f48c25]">local_shipping</span>
-                         </div>
-                         <h3 class="font-black text-2xl text-white mb-2">3. Fast Delivery</h3>
-                         <p class="text-white/80 font-body text-sm">Sit back and relax while we deliver food to your doorstep.</p>
-                     </div>
-                     
-                     <!-- Connecting Line (Desktop) -->
-                     <div class="absolute top-12 left-0 w-full h-0.5 border-t-2 border-dashed border-white/30 hidden md:block -z-0 transform translate-y-1"></div>
-                 </div>
-             </div>
-         </div>
-    </section>
+
 
     <!-- Testimonials -->
     <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto bg-slate-50">
@@ -503,7 +345,5 @@
         </div>
     </section>
     
-    @include('partials.footer')
-
-</body>
-</html>
+  
+@endsection

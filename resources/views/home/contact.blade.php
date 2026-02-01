@@ -1,89 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Contact Us - Foodie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-    <style>
-        body { font-family: 'Outfit', sans-serif; }
-        .font-body { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-        }
-    </style>
-</head>
-<body class="bg-[#fffbf7] text-slate-900 min-h-screen flex flex-col selection:bg-[#f48c25] selection:text-white relative overflow-x-hidden">
-
+@extends('home.layouts.app')
     <!-- Background Pattern -->
     <div class="fixed inset-0 z-0 pointer-events-none opacity-40">
         <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-orange-100/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
     </div>
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-[100] transition-all duration-300 px-6 py-4 lg:px-12 top-0">
-        <div class="glass max-w-7xl mx-auto rounded-full px-6 py-3 flex justify-between items-center shadow-lg shadow-black/5">
-            <!-- Logo -->
-            <a href="{{ route('user.home') }}" class="flex items-center gap-2 group">
-                <div class="bg-gradient-to-br from-[#f48c25] to-orange-600 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-[#f48c25]/30 shadow-lg group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">restaurant</span>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-slate-800">Foodie<span class="text-[#f48c25]">.</span></span>
-            </a>
-
-            <!-- Links -->
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-500">
-                <a href="{{ route('user.home') }}" class="hover:text-[#f48c25] transition-colors relative group">
-                    Home
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f48c25] transition-all group-hover:w-full"></span>
-                </a>
-                <a href="{{ route('shop') }}" class="hover:text-[#f48c25] transition-colors relative group">
-                    Menu
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f48c25] transition-all group-hover:w-full"></span>
-                </a>
-                <a href="{{ route('about') }}" class="hover:text-[#f48c25] transition-colors relative group">
-                    Story
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#f48c25] transition-all group-hover:w-full"></span>
-                </a>
-                <a href="{{ route('contact') }}" class="text-[#f48c25] font-bold">Contact</a>
-            </div>
-
-            <!-- Actions -->
-            <div class="flex items-center gap-4">
-                 <a href="{{ route('cart.view') }}" class="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f48c25] hover:scale-110 transition-all shadow-lg shadow-black/10">
-                    <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
-                    @if(session('cart'))
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white animate-bounce">
-                        {{ count(session('cart')) }}
-                    </span>
-                    @endif
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
+@section('content')
+   <!-- Hero Section -->
     <section class="relative min-h-[50vh] flex items-center justify-center pt-32 pb-20 overflow-hidden">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
@@ -98,7 +20,7 @@
                 <span class="text-xs font-bold text-white uppercase tracking-wide">We're Online</span>
             </div>
             
-            <h1 class="text-6xl lg:text-8xl font-black text-white tracking-tight mb-6 drop-shadow-2xl">
+            <h1 class="text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 drop-shadow-2xl">
                 Get in <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-yellow-400">Touch</span>
             </h1>
             <p class="text-xl text-slate-200 font-body max-w-xl mx-auto leading-relaxed drop-shadow-md">
@@ -297,7 +219,6 @@
         </span>
     </button>
 
-    @include('partials.footer')
+@endsection
 
-</body>
-</html>
+

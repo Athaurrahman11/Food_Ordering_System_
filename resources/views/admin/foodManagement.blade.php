@@ -33,7 +33,7 @@
     @foreach($food_items as $food)
     <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden group hover:shadow-xl transition-shadow">
         <div class="relative h-48 overflow-hidden">
-            <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('{{ asset('Food_items/' . $food->image) }}')"></div>
+            <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('{{ Str::startsWith($food->image, ['http', 'https']) ? $food->image : asset('Food_items/' . $food->image) }}')"></div>
             <div class="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] font-bold uppercase text-white tracking-widest">{{ $food->category }}</div>
         </div>
         <div class="p-5">

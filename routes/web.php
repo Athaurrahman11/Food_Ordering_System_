@@ -21,8 +21,13 @@ route::get('delete_menu/{id}',[AdminController::class,'delete_menu']);
 route::get('edit_menu/{id}',[AdminController::class,'edit_menu']);
 route::get('orders',[AdminController::class,'orders']);
 route::get('add_food',[AdminController::class,'add_food']);
-route::get('food',[AdminController::class,'food']);
+route::get('food',[AdminController::class,'food'])->name('food_management');
+route::post('store_food',[AdminController::class,'store_food']);
+route::get('edit_food/{id}',[AdminController::class,'edit_food']);
+route::post('update_food/{id}',[AdminController::class,'update_food']);
+route::get('delete_food/{id}',[AdminController::class,'delete_food']);
 route::post('update_menu/{id}',[AdminController::class,'update_menu']);
+route::get('customers',[AdminController::class,'customers']);
 
 // User Dashboard (Authenticated)
 Route::get('/dashboard', function () {
