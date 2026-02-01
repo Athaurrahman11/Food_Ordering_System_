@@ -13,54 +13,43 @@
             <p class="text-slate-500 dark:text-slate-400 mt-1 mb-4">Welcome back, here's what's happening with your store today.</p>
         </div>
         <!-- Stats Grid -->
+        <!-- Stats Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <div class="flex justify-between items-start mb-4">
                     <div class="p-2 bg-primary/10 rounded-lg text-primary">
                         <span class="material-symbols-outlined">payments</span>
                     </div>
-                    <span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">trending_up</span> 12.5%
-                    </span>
                 </div>
                 <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Revenue</p>
-                <h3 class="text-2xl font-bold mt-1">$12,450.00</h3>
+                <h3 class="text-2xl font-bold mt-1">${{ number_format($total_revenue, 2) }}</h3>
             </div>
             <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <div class="flex justify-between items-start mb-4">
                     <div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
                         <span class="material-symbols-outlined">shopping_cart</span>
                     </div>
-                    <span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">trending_up</span> 8.2%
-                    </span>
                 </div>
                 <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Orders</p>
-                <h3 class="text-2xl font-bold mt-1">1,280</h3>
+                <h3 class="text-2xl font-bold mt-1">{{ number_format($total_orders) }}</h3>
             </div>
             <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <div class="flex justify-between items-start mb-4">
                     <div class="p-2 bg-blue-500/10 rounded-lg text-blue-500">
-                        <span class="material-symbols-outlined">person_add</span>
+                        <span class="material-symbols-outlined">restaurant_menu</span>
                     </div>
-                    <span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">trending_up</span> 5.1%
-                    </span>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Active Customers</p>
-                <h3 class="text-2xl font-bold mt-1">842</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Food Items</p>
+                <h3 class="text-2xl font-bold mt-1">{{ number_format($total_food_items) }}</h3>
             </div>
             <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <div class="flex justify-between items-start mb-4">
                     <div class="p-2 bg-yellow-500/10 rounded-lg text-yellow-500">
-                        <span class="material-symbols-outlined">star</span>
+                        <span class="material-symbols-outlined">menu_book</span>
                     </div>
-                    <span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">trending_up</span> 0.3%
-                    </span>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">New Reviews</p>
-                <h3 class="text-2xl font-bold mt-1">4.8/5</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Categories</p>
+                <h3 class="text-2xl font-bold mt-1">{{ number_format($total_menu_items) }}</h3>
             </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -107,48 +96,22 @@
                 <div>
                     <h3 class="font-bold text-lg mb-4">Top Categories</h3>
                     <div class="space-y-4">
+                        @foreach($top_categories as $cat)
                         <div class="flex items-center gap-3">
-                            <div class="size-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600">
-                                <span class="material-symbols-outlined">fastfood</span>
+                            <div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-400">
+                                <span class="material-symbols-outlined">category</span>
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between text-sm font-medium mb-1">
-                                    <span>Burgers &amp; Sides</span>
-                                    <span>42%</span>
+                                    <span>{{ $cat->category }}</span>
+                                    <span>{{ $cat->percentage }}%</span>
                                 </div>
                                 <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full">
-                                    <div class="bg-orange-500 h-full rounded-full" style="width: 42%"></div>
+                                    <div class="bg-primary h-full rounded-full" style="width: {{ $cat->percentage }}%"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div class="size-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
-                                <span class="material-symbols-outlined">local_pizza</span>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between text-sm font-medium mb-1">
-                                    <span>Pizzas</span>
-                                    <span>28%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full">
-                                    <div class="bg-blue-500 h-full rounded-full" style="width: 28%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="size-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
-                                <span class="material-symbols-outlined">eco</span>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between text-sm font-medium mb-1">
-                                    <span>Salads &amp; Healthy</span>
-                                    <span>15%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full">
-                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 15%"></div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <button class="w-full mt-6 py-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">

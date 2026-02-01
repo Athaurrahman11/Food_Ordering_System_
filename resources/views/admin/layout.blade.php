@@ -45,18 +45,17 @@
 
 
 <div class="p-6">
-<div class="flex items-center gap-3">
-<div class="flex items-center gap-2">
-<img class="w-14 h-14 rounded-full border  dark:border-slate-700 border-blue-300"  src="{{ asset('images/image.png') }}"/>
-<span class="text-sm font-medium text-blue-500">Hello,</span>
-</div>
-
-
-<div>
-<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none">FoodAdmin</h1>
-<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">  Admin</p>
-</div>
-</div>
+    <div class="flex items-center gap-3">
+        <div class="relative">
+            <img class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/image.png') }}" alt="Admin Profile"/>
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
+        </div>
+        <div>
+            <p class="text-xs font-bold text-primary mb-0.5">Welcome Back,</p>
+            <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">Food Admin</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">Administrator</p>
+        </div>
+    </div>
 </div>
 <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
 <a class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin_dashboard') ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800' }}" href="{{ url('admin_dashboard') }}">
@@ -120,14 +119,14 @@
 
         <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-card-dark z-50 transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl md:hidden">
             <div class="p-4 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <img class="w-10 h-10 rounded-full border border-blue-300" src="{{ asset('images/image.png') }}"/>
+                <div class="flex items-center gap-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/image.png') }}" alt="Admin"/>
                     <div>
-                        <h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">FoodAdmin</h1>
-                        <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">Admin</p>
+                        <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">Food Admin</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">Administrator</p>
                     </div>
                 </div>
-                <button id="close-sidebar-btn" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+                <button id="close-sidebar-btn" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
