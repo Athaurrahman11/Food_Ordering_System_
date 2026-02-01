@@ -10,6 +10,7 @@
     <div class="text-center mb-12">
         <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Your Order</span>
         <h1 class="text-4xl lg:text-5xl font-black text-slate-900">Shopping <span class="text-[#f48c25]">Cart</span></h1>
+        <div class="w-44 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
     </div>
 
     @if(session('cart') && count(session('cart')) > 0)
@@ -20,30 +21,46 @@
             @php $total = 0; @endphp
             @foreach(session('cart') as $id => $details)
             @php $total += $details['price'] * $details['quantity']; @endphp
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-6 group hover:border-[#f48c25]/30 transition-colors">
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-12 items-center gap-6 group hover:border-[#f48c25]/30 transition-colors">
                 
-                <!-- Image Placeholder (Cart items usually need images, using generic if not in session) -->
-                <div class="w-24 h-24 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0">
-                    <span class="material-symbols-outlined text-4xl">lunch_dining</span>
+                <!-- Image -->
+                <div class="md:col-span-2 flex justify-center md:justify-start">
+                    <div class="w-24 h-24 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0 overflow-hidden">
+                        @if(isset($details['image']) && $details['image'])
+                             <img src="{{ asset('Food_Items/'.$details['image']) }}" class="w-full h-full object-cover">
+                        @else
+                             <span class="material-symbols-outlined text-4xl">lunch_dining</span>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="flex-1 text-center md:text-left">
-                    <h3 class="font-black text-xl text-slate-900 mb-1">{{ $details['name'] }}</h3>
+                <!-- Info -->
+                <div class="md:col-span-4 text-center md:text-left">
+                    <h3 class="font-black text-xl text-slate-900 mb-1 truncate" title="{{ $details['name'] }}">{{ $details['name'] }}</h3>
                     <p class="text-[#f48c25] font-bold">${{ $details['price'] }}</p>
                 </div>
 
-                <div class="flex items-center gap-4 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Qty</span>
-                    <span class="font-black text-slate-900">{{ $details['quantity'] }}</span>
+                <!-- Qty -->
+                <div class="md:col-span-3 flex justify-center md:justify-start">
+                    <div class="flex items-center gap-4 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Qty</span>
+                        <span class="font-black text-slate-900">{{ $details['quantity'] }}</span>
+                    </div>
                 </div>
 
-                <div class="font-black text-xl text-slate-900">
-                    ${{ $details['price'] * $details['quantity'] }}
+                <!-- Total -->
+                <div class="md:col-span-2 text-center md:text-left">
+                    <div class="font-black text-xl text-slate-900">
+                        ${{ $details['price'] * $details['quantity'] }}
+                    </div>
                 </div>
 
-                <a href="{{ route('cart.remove', $id) }}" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm">
-                    <span class="material-symbols-outlined text-sm">delete</span>
-                </a>
+                <!-- Remove -->
+                <div class="md:col-span-1 flex justify-center md:justify-end">
+                    <a href="{{ route('cart.remove', $id) }}" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove">
+                        <span class="material-symbols-outlined text-sm">delete</span>
+                    </a>
+                </div>
             </div>
             @endforeach
         </div>
@@ -57,18 +74,34 @@
                     <span>Subtotal</span>
                     <span class="text-slate-900 font-bold">${{ $total }}</span>
                 </div>
+                
+                @php
+                    $shipping = $total > 1000 ? 0 : 500;
+                @endphp
+
                 <div class="flex justify-between items-center text-slate-500 font-medium">
                     <span>Delivery Fee</span>
-                    <span class="text-green-600 font-bold">Free</span>
+                    @if($shipping == 0)
+                        <span class="text-green-600 font-bold">Free</span>
+                    @else
+                        <span class="text-slate-900 font-bold">${{ $shipping }}</span>
+                    @endif
                 </div>
+
+                @if($shipping > 0)
+                <div class="text-xs text-slate-400 mt-1">
+                    Add ${{ 1000 - $total }} more for free shipping
+                </div>
+                @endif
+
                 <div class="h-px bg-slate-100 my-4"></div>
                 <div class="flex justify-between items-center text-xl font-black text-slate-900">
                     <span>Total</span>
-                    <span>${{ $total }}</span>
+                    <span>${{ $total + $shipping }}</span>
                 </div>
             </div>
 
-            <a href="{{ route('checkout') }}" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-[#f48c25] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg flex items-center justify-center gap-2 group">
+            <a href="{{ route('checkout') }}" class="w-full bg-[#f48c25] text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-orange-600 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 group">
                 Checkout
                 <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>

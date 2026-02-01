@@ -118,6 +118,7 @@
         <div class="text-center mb-16">
             <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Meet the Minds</span>
             <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Our Culinary <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">Heroes</span></h2>
+            <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">

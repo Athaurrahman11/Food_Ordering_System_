@@ -35,7 +35,7 @@
             
             <!-- Left Side: Contact Form (7 Cols) -->
             <div class="lg:col-span-7">
-                <div class="glass-card p-8 lg:p-12 rounded-[3rem] relative overflow-hidden group">
+                <div class="bg-white shadow-xl border border-slate-100 p-8 lg:p-12 rounded-[3rem] relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-100/50 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover:bg-orange-200/50 transition-colors duration-700"></div>
                     
                     <h2 class="font-black text-3xl text-slate-900 mb-8 flex items-center gap-3 relative z-10">
@@ -88,13 +88,46 @@
                         </p>
                     </form>
                 </div>
+                
+                <!-- FAQ Section -->
+                <div class="mt-8">
+                    <h3 class="font-black text-xl text-slate-900 mb-6 px-4">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <!-- FAQ Item 1 -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300">
+                            <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#f48c25] text-lg">schedule</span>
+                                What are your operating hours?
+                            </h4>
+                            <p class="text-slate-500 text-sm font-body leading-relaxed pl-7">We are open from 10:00 AM to 11:00 PM, Monday through Sunday. Holiday hours may vary.</p>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300">
+                             <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#f48c25] text-lg">local_shipping</span>
+                                How can I track my order?
+                            </h4>
+                            <p class="text-slate-500 text-sm font-body leading-relaxed pl-7">You can track your order in real-time through the "My Orders" section in your dashboard or via the mobile app.</p>
+                        </div>
+                        
+                         <!-- FAQ Item 3 -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300">
+                             <h4 class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[#f48c25] text-lg">currency_exchange</span>
+                                Do you offer refunds?
+                            </h4>
+                            <p class="text-slate-500 text-sm font-body leading-relaxed pl-7">Yes, if there is an issue with your order (missing items, wrong dish), please contact us within 30 minutes for a resolution.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- Right Side: Contact Info & Extras (5 Cols) -->
             <div class="lg:col-span-5 space-y-6">
                 
                 <!-- Contact Details Card -->
-                <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden">
+                <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-[2.5rem] relative overflow-hidden">
                     <h3 class="font-black text-xl text-slate-900 mb-8">Contact Details</h3>
                     
                     <ul class="space-y-6 relative z-10">

@@ -54,23 +54,37 @@
         <div class="text-center mb-16">
             <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">What's on your mind?</span>
             <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Featured <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">Categories</span></h2>
+            <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
            
             @foreach ($featured_foods as $featured_food)
-                 <a href="{{ route('shop', ['category' => $featured_food->category]) }}" class="group bg-white border border-slate-100 p-6 rounded-[2.5rem] flex flex-col items-center hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.2)] hover:border-[#f48c25]/30 transition-all duration-300">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img src="{{ asset('Menu_items/'.$featured_food->image) }}" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-extrabold text-lg text-slate-800 mb-1">{{ $featured_food->category }}</h3>
-                <p class="text-slate-500 font-body text-sm leading-relaxed">{{ $featured_food->description }}</p>
-                <span class="text-xs font-bold text-[#f48c25] opacity-0 group-hover:opacity-100 transition-opacity  group-hover:translate-y-0">Order Now</span>
+                 <a href="{{ route('shop', ['category' => $featured_food->category]) }}" class="group relative bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col sm:flex-row h-full hover:-translate-y-1">
+                    
+                    <!-- Image -->
+                    <div class="w-full sm:w-2/5 h-64 sm:h-auto overflow-hidden relative shrink-0">
+                         <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                         <img src="{{ asset('Menu_items/'.$featured_food->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-8 flex flex-col justify-center flex-1">
+                        <div class="mb-4">
+                            <h3 class="font-black text-3xl text-slate-900 mb-2 group-hover:text-[#f48c25] transition-colors">{{ $featured_food->category }}</h3>
+                            <p class="text-slate-500 font-body text-base leading-relaxed line-clamp-2">{{ $featured_food->description }}</p>
+                        </div>
+                        
+                        <div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-50">
+                            <span class="text-xs font-bold text-[#f48c25] uppercase tracking-wider">Order Now</span>
+                            <span class="w-12 h-12 rounded-full bg-slate-50 text-slate-900 flex items-center justify-center group-hover:bg-[#f48c25] group-hover:text-white transition-all shadow-sm group-hover:shadow-lg group-hover:shadow-orange-500/30">
+                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
                 </a>
             @endforeach
             
-         
-           
         </div>
     </section>
     
@@ -79,6 +93,7 @@
             <div class="text-center md:text-left">
                 <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Food Items</span>
                 <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Popular <span class="text-[#f48c25]">Dishes</span></h2>
+                <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto md:mx-0"></div>
             </div>
             <a href="{{ route('shop') }}" class="group flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#f48c25] transition-colors">
                 View Full Food Items
@@ -89,42 +104,44 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($food_items as $food)
           
-            <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border border-slate-100 hover:shadow-[0_20px_50px_-10px_rgba(244,140,37,0.15)] hover:border-[#f48c25]/30 hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full relative">
+            <div class="group bg-[#2b2118] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#f48c25]/20 hover:-translate-y-2 transition-all duration-500 flex flex-col relative h-full border border-white/5">
                 
-                <div class="relative h-60 rounded-[2rem] overflow-hidden mb-5 flex-shrink-0 bg-slate-50">
+                <!-- Image Area -->
+                <div class="relative h-60 bg-slate-800 isolate transform-gpu">
+                    <!-- Badges Container -->
                     <div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
+                         <!-- Veg/Non-Veg Badge -->
                         <span class="bg-white/90 backdrop-blur text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider flex items-center gap-1 w-max border {{ $food->stock ? 'border-green-500 text-green-600' : 'border-red-500 text-red-600' }}">
                             <span class="w-2 h-2 rounded-full {{ $food->stock ? 'bg-green-500' : 'bg-red-500' }}"></span>
                             Stock: {{ $food->stock }}
                         </span>
                     </div>
                     
-                    <img src="{{ asset('Food_Items/'.$food->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="{{ asset('Food_Items/'.$food->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60"></div>
+                    <!-- Dark Gradient -->
+                    <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#2b2118] to-transparent"></div>
                 </div>
                 
-                <div class="px-4 pb-4 flex flex-col flex-1">
+                <!-- Content -->
+                <div class="px-6 pb-6 pt-2 flex flex-col flex-1">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-black text-xl text-slate-900 leading-tight group-hover:text-[#f48c25] transition-colors line-clamp-1">{{ $food->title }}</h3>
-                        <span class="text-xs font-bold bg-slate-100 text-slate-500 px-2 py-1 rounded-lg uppercase tracking-wider">{{ $food->category }}</span>
+                        <h3 class="font-bold text-xl text-white leading-tight group-hover:text-[#f48c25] transition-colors line-clamp-1">{{ $food->title }}</h3>
+                        <span class="text-[#f48c25] font-black text-xl">${{ $food->price }}</span>
                     </div>
                     
-                    <p class="text-slate-400 text-sm font-body mb-6 line-clamp-2 flex-1">{{ $food->detail }}</p>
-                    
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Price</span>
-                            <span class="text-2xl font-black text-slate-900">${{ $food->price }}</span>
-                        </div>
-                        
+                    <p class="text-sm text-gray-400 line-clamp-2 leading-relaxed mb-6">Delicious {{ strtolower($food->category) }} prepared fresh for you.</p>
+
+                    <div class="mt-auto">
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{ $food->id }}">
                             <input type="hidden" name="name" value="{{ $food->title }}">
                             <input type="hidden" name="price" value="{{ $food->price }}">
-                            <button type="submit" class="bg-slate-900 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg hover:bg-[#f48c25] hover:scale-110 hover:shadow-orange-500/30 transition-all duration-300 group/btn">
-                                <span class="material-symbols-outlined group-hover/btn:animate-bounce">add_shopping_cart</span>
+                            
+                            <button type="submit" class="w-full bg-[#f48c25] text-white py-3.5 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#e07b1a] transition-all shadow-lg shadow-[#f48c25]/25 flex items-center justify-center gap-2 active:scale-95">
+                                <span>ADD TO CART</span>
+                                <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
                             </button>
                         </form>
                     </div>
@@ -151,6 +168,7 @@
              <div class="text-center mb-16">
                 <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Why Choose Us</span>
                 <h2 class="text-4xl lg:text-5xl font-black text-slate-900">We Serve <span class="text-[#f48c25]">Passion</span></h2>
+                <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -199,6 +217,7 @@
     <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto bg-slate-50">
         <div class="text-center mb-16">
             <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Customer <span class="text-[#f48c25]">Love</span></h2>
+             <div class="w-60 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">

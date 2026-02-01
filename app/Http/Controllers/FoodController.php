@@ -72,9 +72,27 @@ class FoodController extends Controller
     }
 
     public function checkout() {
+        if(!session('cart') || count(session('cart')) == 0) {
+            return redirect()->route('shop');
+        }
+        return view('home.checkout');
+    }
+
+    public function placeOrder(Request $request) {
+        // Validate request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string',
+            'payment_method' => 'required|in:cod,card'
+        ]);
+
         // Here you would normally save the order to the DB
-        // For now, we just clear the cart
+        // For example: Order::create([...]);
+
+        // Clear the cart
         session()->forget('cart');
-        return redirect()->route('user.home')->with('success', 'Order placed successfully!');
+
+        return redirect()->route('user.home')->with('success', 'Order placed successfully! Thank you for ordering.');
     }
 }

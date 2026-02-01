@@ -66,6 +66,7 @@ Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add')
 Route::get('/cart', [FoodController::class, 'viewCart'])->name('cart.view');
 Route::get('/cart-remove/{id}', [FoodController::class, 'removeFromCart'])->name('cart.remove');
 Route::get('/checkout', [FoodController::class, 'checkout'])->name('checkout');
+Route::post('/place-order', [FoodController::class, 'placeOrder'])->name('place.order');
 
 // Other
 route::get('ind',function(){
