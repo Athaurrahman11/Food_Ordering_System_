@@ -44,32 +44,29 @@ Route::middleware('auth')->group(function () {
 Route::get('/restaurants', [RestaurantController::class, 'index']);
 require __DIR__.'/auth.php';
 
-route::get('home',function(){
-    return view('home');
-});
+route::get('home',[FoodController::class, 'home'])->name('user.home');
 
 route::get('ind',function(){
     return view('restaurants.index');
 });
 
-<<<<<<< HEAD
+// Cart Action
 // Cart Action
 Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [FoodController::class, 'viewCart'])->name('cart.view');
+Route::get('/checkout', [FoodController::class, 'checkout'])->name('checkout');
+Route::get('/cart-remove/{id}', [FoodController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::get('/login', function () { return view('auth.login'); })->name('login');
 Route::get('/register', function () { return view('auth.register'); })->name('register');
 
 // -------------------------------------------------------------------------
 // Page Routes
-Route::get('/', function () { return view('user.home'); })->name('home');
-Route::get('/shop', [FoodController::class, 'index'])->name('shop');
-Route::get('/about', function () { return view('user.about'); })->name('about');
-Route::get('/tracking', function () { return view('user.tracking'); })->name('tracking');
-Route::get('/contact', function () { return view('user.contact'); })->name('contact');
-=======
-route::get('add_restaurant', [RestaurantController::class, 'create']);
-route::post('store_restaurant', [RestaurantController::class, 'store']);
-route::get('edit_restaurant/{id}', [RestaurantController::class, 'edit']);
-route::post('update_restaurant/{id}', [RestaurantController::class, 'update']);
-route::get('delete_restaurant/{id}', [RestaurantController::class, 'destroy']);
->>>>>>> 352787276776fc9ff900a8533d8336610b997f3c
+// Route::get('/', function () { return view('user.home'); })->name('home');
+// Route::get('/shop', [FoodController::class, 'index'])->name('shop');
+Route::get('/about', function () { return view('home.about'); })->name('about');
+Route::get('/tracking', function () { return view('home.tracking'); })->name('tracking'); // Tracking likely still in user or needs moving? Checking later.
+Route::get('/contact', function () { return view('home.contact'); })->name('contact');
+
+
+ Route::get('/shop', [FoodController::class, 'index'])->name('shop');

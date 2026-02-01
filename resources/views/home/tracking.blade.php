@@ -28,7 +28,7 @@
             </div>
             <span class="text-xl font-bold text-[#1c140d]">FoodieSystem</span>
         </div>
-        <a href="{{ route('home') }}" class="text-sm font-bold text-slate-400 hover:text-[#f48c25] transition-colors flex items-center gap-1">
+        <a href="{{ route('user.home') }}" class="text-sm font-bold text-slate-400 hover:text-[#f48c25] transition-colors flex items-center gap-1">
             <span class="material-symbols-outlined text-base">arrow_back</span> Back to Home
         </a>
     </header>
