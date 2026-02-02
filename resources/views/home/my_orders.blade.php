@@ -68,7 +68,7 @@
                             </span>
                         </td>
                         <td class="p-6 text-right">
-                            <a href="{{ route('cancel_order', $order->id) }}" onclick="return confirm('Are you sure you want to delete this order?')" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-400 hover:bg-red-500 hover:text-white transition-all shadow-sm hover:shadow-red-500/30">
+                            <a href="{{ route('cancel_order', $order->id) }}" onclick="confirmation(event)" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-400 hover:bg-red-500 hover:text-white transition-all shadow-sm hover:shadow-red-500/30">
                                 <span class="material-symbols-outlined text-xl">close</span>
                             </a>
                         </td>

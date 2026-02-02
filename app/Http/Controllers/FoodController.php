@@ -134,7 +134,7 @@ class FoodController extends Controller
         foreach($cartItems as $item) {
             $total += $item->food->price * $item->quantity;
         }
-        $shipping = $total > 1000 ? 0 : 500;
+        $shipping = $total > 200 ? 0 : 100;
         $final = $total + $shipping;
         $count = $cartItems->count();
 
@@ -185,7 +185,7 @@ class FoodController extends Controller
         foreach($cartItems as $item) {
             $total += $item->food->price * $item->quantity;
         }
-        $shipping = $total > 1000 ? 0 : 500;
+        $shipping = $total > 200 ? 0 : 100;
         $final_amount = $total + $shipping;
 
         // Create Order

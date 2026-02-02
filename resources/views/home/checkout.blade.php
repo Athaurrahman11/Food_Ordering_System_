@@ -62,12 +62,23 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         
+                        <label class="relative cursor-pointer group">
+                            <input type="radio" name="payment_method" value="cod" class="peer sr-only" checked>
+                            <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white peer-checked:border-[#f48c25] peer-checked:bg-orange-50/50 transition-all hover:border-orange-200 h-full">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="material-symbols-outlined text-green-600">payments</span>
+                                    <span class="font-bold text-slate-900">Cash on Delivery</span>
+                                </div>
+                                <p class="text-xs text-slate-500">Pay locally upon receipt</p>
+                            </div>
+                            <div class="absolute top-5 right-5 w-4 h-4 rounded-full border-2 border-slate-300 peer-checked:border-[#f48c25] peer-checked:bg-[#f48c25] transition-colors"></div>
+                        </label>
 
                         <label class="relative cursor-pointer group">
-                            <input type="radio" name="payment_method" value="card" class="peer sr-only" checked>
-                            <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white peer-checked:border-[#f48c25] peer-checked:bg-orange-50/50 transition-all hover:border-orange-200">
+                            <input type="radio" name="payment_method" value="card" class="peer sr-only">
+                            <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white peer-checked:border-[#f48c25] peer-checked:bg-orange-50/50 transition-all hover:border-orange-200 h-full">
                                 <div class="flex items-center gap-3 mb-2">
-                                    <span class="material-symbols-outlined text-slate-400">credit_card</span>
+                                    <span class="material-symbols-outlined text-blue-600">credit_card</span>
                                     <span class="font-bold text-slate-900">Online Payment</span>
                                 </div>
                                 <p class="text-xs text-slate-500">Pay securely with Stripe</p>

@@ -81,7 +81,7 @@
                 </div>
                 
                 @php
-                    $shipping = $total > 1000 ? 0 : 500;
+                    $shipping = $total > 200 ? 0 : 100;
                 @endphp
 
                 <div class="flex justify-between items-center text-slate-500 font-medium">
@@ -96,8 +96,9 @@
                 </div>
 
                 <div id="free-shipping-note" class="text-xs text-slate-400 mt-1 {{ $shipping == 0 ? 'hidden' : '' }}">
-                    Add $<span id="shipping-diff">{{ 1000 - $total }}</span> more for free shipping
+                    Add $<span id="shipping-diff">{{ 200 - $total }}</span> more for free shipping
                 </div>
+
 
                 <div class="h-px bg-slate-100 my-4"></div>
                 <div class="flex justify-between items-center text-xl font-black text-slate-900">
@@ -217,7 +218,7 @@
                          if(note) {
                              note.classList.remove('hidden');
                              const diffEl = document.getElementById('shipping-diff');
-                             if(diffEl) diffEl.textContent = (1000 - data.subtotal);
+                             if(diffEl) diffEl.textContent = (200 - data.subtotal);
                          }
                     }
                 }

@@ -125,7 +125,7 @@
             <!-- Team Member 1 -->
             <div class="group relative">
                 <div class="h-[400px] rounded-[2.5rem] overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                    <img src="{{ asset('images/Chefs/Chef1.png') }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
                     
                     <div class="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -141,14 +141,14 @@
              <!-- Team Member 2 -->
              <div class="group relative mt-12 md:mt-0">
                 <div class="h-[400px] rounded-[2.5rem] overflow-hidden relative">
-                    <img src="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                    <img src="{{ asset('images/Chefs/Chef2.png') }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
                     
                     <div class="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-black text-2xl mb-1">Sarah Jenkins</h3>
-                        <p class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-4">Head Pastry Chef</p>
+                        <h3 class="text-white font-black text-2xl mb-1">Daniel Moretti</h3>
+                        <p class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-4">CULINARY DIRECTOR</p>
                          <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                            Turning sugar and flour into edible dreams since 2010.
+                            2-time Global Food Award winner specializing in contemporary fusion cuisine.
                         </p>
                     </div>
                 </div>
@@ -157,11 +157,11 @@
              <!-- Team Member 3 -->
              <div class="group relative">
                 <div class="h-[400px] rounded-[2.5rem] overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                    <img src="{{ asset('images/Chefs/Chef3.jpg') }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
                     
                     <div class="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="text-white font-black text-2xl mb-1">David Chen</h3>
+                        <h3 class="text-white font-black text-2xl mb-1">Arjun Patel</h3>
                         <p class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-4">Sous Chef</p>
                          <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                             Master of knives and flavors, bringing energy to the line.
