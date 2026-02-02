@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AccessMiddleware
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class AccessMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $role = Auth::user()->user_role;
-
-        if ($role !== 'admin') {
-            return redirect()->route('user.home');
+        // If user is logged in AND is an admin, redirect them to admin dashboard
+        if (Auth::check() && Auth::user()->user_role === 'admin') {
+            return redirect()->route('admin_dashboard');
         }
 
         return $next($request);

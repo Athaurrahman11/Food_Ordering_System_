@@ -21,7 +21,7 @@
             @php $total = 0; @endphp
             @foreach($cartItems as $item)
             @php $total += $item->food->price * $item->quantity; @endphp
-            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-12 items-center gap-6 group hover:border-[#f48c25]/30 transition-colors">
+            <div id="cart-item-{{ $item->id }}" class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-12 items-center gap-6 group hover:border-[#f48c25]/30 transition-colors">
                 
                 <!-- Image -->
                 <div class="md:col-span-2 flex justify-center md:justify-start">
@@ -43,11 +43,11 @@
                 <!-- Qty -->
                 <div class="md:col-span-3 flex justify-center md:justify-start">
                     <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
-                        <a href="{{ route('cart.decrement', $item->id) }}" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
+                        <a href="{{ route('cart.decrement', $item->id) }}" class="cart-control w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
                             <span class="font-bold text-lg leading-none mb-0.5">-</span>
                         </a>
-                        <span class="font-black text-slate-900 w-6 text-center">{{ $item->quantity }}</span>
-                        <a href="{{ route('cart.increment', $item->id) }}" class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
+                        <span id="qty-{{ $item->id }}" class="font-black text-slate-900 w-6 text-center">{{ $item->quantity }}</span>
+                        <a href="{{ route('cart.increment', $item->id) }}" class="cart-control w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-[#f48c25] hover:text-white transition-all shadow-sm">
                             <span class="font-bold text-lg leading-none mb-0.5">+</span>
                         </a>
                     </div>
@@ -56,13 +56,13 @@
                 <!-- Total -->
                 <div class="md:col-span-2 text-center md:text-left">
                     <div class="font-black text-xl text-slate-900">
-                        ${{ $item->food->price * $item->quantity }}
+                        $<span id="total-{{ $item->id }}">{{ $item->food->price * $item->quantity }}</span>
                     </div>
                 </div>
 
                 <!-- Remove -->
                 <div class="md:col-span-1 flex justify-center md:justify-end">
-                    <a href="{{ route('cart.remove', $item->id) }}" class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove">
+                    <a href="{{ route('cart.remove', $item->id) }}" class="cart-remove w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove">
                         <span class="material-symbols-outlined text-sm">delete</span>
                     </a>
                 </div>
@@ -77,7 +77,7 @@
             <div class="space-y-4 mb-8">
                 <div class="flex justify-between items-center text-slate-500 font-medium">
                     <span>Subtotal</span>
-                    <span class="text-slate-900 font-bold">${{ $total }}</span>
+                    <span class="text-slate-900 font-bold">$<span id="cart-subtotal">{{ $total }}</span></span>
                 </div>
                 
                 @php
@@ -86,23 +86,23 @@
 
                 <div class="flex justify-between items-center text-slate-500 font-medium">
                     <span>Delivery Fee</span>
-                    @if($shipping == 0)
-                        <span class="text-green-600 font-bold">Free</span>
-                    @else
-                        <span class="text-slate-900 font-bold">${{ $shipping }}</span>
-                    @endif
+                    <span id="cart-shipping-container">
+                        @if($shipping == 0)
+                            <span class="text-green-600 font-bold">Free</span>
+                        @else
+                            <span class="text-slate-900 font-bold display-shipping">$<span id="cart-shipping">{{ $shipping }}</span></span>
+                        @endif
+                    </span>
                 </div>
 
-                @if($shipping > 0)
-                <div class="text-xs text-slate-400 mt-1">
-                    Add ${{ 1000 - $total }} more for free shipping
+                <div id="free-shipping-note" class="text-xs text-slate-400 mt-1 {{ $shipping == 0 ? 'hidden' : '' }}">
+                    Add $<span id="shipping-diff">{{ 1000 - $total }}</span> more for free shipping
                 </div>
-                @endif
 
                 <div class="h-px bg-slate-100 my-4"></div>
                 <div class="flex justify-between items-center text-xl font-black text-slate-900">
                     <span>Total</span>
-                    <span>${{ $total + $shipping }}</span>
+                    <span>$<span id="cart-total">{{ $total + $shipping }}</span></span>
                 </div>
             </div>
 
@@ -133,4 +133,104 @@
 
     @endif
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Helper to update Navbar Badge if helper function exists, or implement minimal version
+        function updateBadge(count) {
+             const cartLink = document.querySelector('a[href*="cart"]');
+              if(!cartLink) return;
+              let badge = cartLink.querySelector('.bg-red-500');
+              if (count > 0) {
+                  if (!badge) {
+                      badge = document.createElement('span');
+                      badge.className = 'absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white';
+                      cartLink.appendChild(badge);
+                  }
+                  badge.textContent = count;
+              } else {
+                  if (badge) badge.remove();
+              }
+        }
+
+        async function handleCartAction(e) {
+            e.preventDefault();
+            const link = e.currentTarget;
+            if(link.classList.contains('disabled')) return;
+            
+            link.classList.add('disabled', 'opacity-50');
+            
+            try {
+                const response = await fetch(link.href, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if(response.ok) {
+                    const data = await response.json();
+                    
+                    if(data.is_empty) {
+                        window.location.reload();
+                        return;
+                    }
+
+                    // Update Badge
+                    updateBadge(data.cart_count);
+
+                    // If Removing Item
+                    if(link.classList.contains('cart-remove')) {
+                        const row = document.getElementById('cart-item-' + link.href.split('/').pop()); // Extract ID from URL is risky if route changes, better to rely on data attribute or parent. But here link is inside row.
+                        const rowEl = link.closest('[id^="cart-item-"]');
+                        if(rowEl) {
+                            rowEl.style.transition = 'all 0.3s ease';
+                            rowEl.style.opacity = '0';
+                            rowEl.style.transform = 'translateX(20px)';
+                            setTimeout(() => rowEl.remove(), 300);
+                        }
+                    } else {
+                        // Updating Qty
+                        if(data.item_id) {
+                            const qtyEl = document.getElementById('qty-' + data.item_id);
+                            const totalEl = document.getElementById('total-' + data.item_id);
+                            if(qtyEl) qtyEl.textContent = data.item_quantity;
+                            if(totalEl) totalEl.textContent = data.item_total;
+                        }
+                    }
+
+                    // Update Totals
+                    const subtotalEl = document.getElementById('cart-subtotal');
+                    const totalEl = document.getElementById('cart-total');
+                    if(subtotalEl) subtotalEl.textContent = data.subtotal;
+                    if(totalEl) totalEl.textContent = data.total;
+
+                    // Update Shipping UI
+                    const shippingContainer = document.getElementById('cart-shipping-container');
+                    const note = document.getElementById('free-shipping-note');
+                    
+                    if(data.shipping == 0) {
+                         if(shippingContainer) shippingContainer.innerHTML = '<span class="text-green-600 font-bold">Free</span>';
+                         if(note) note.classList.add('hidden');
+                    } else {
+                         if(shippingContainer) shippingContainer.innerHTML = '<span class="text-slate-900 font-bold display-shipping">$<span id="cart-shipping">' + data.shipping + '</span></span>';
+                         if(note) {
+                             note.classList.remove('hidden');
+                             const diffEl = document.getElementById('shipping-diff');
+                             if(diffEl) diffEl.textContent = (1000 - data.subtotal);
+                         }
+                    }
+                }
+            } catch (error) {
+                console.error("Cart Error", error);
+            } finally {
+                link.classList.remove('disabled', 'opacity-50');
+            }
+        }
+
+        document.querySelectorAll('.cart-control, .cart-remove').forEach(btn => {
+            btn.addEventListener('click', handleCartAction);
+        });
+    });
+</script>
 @endsection

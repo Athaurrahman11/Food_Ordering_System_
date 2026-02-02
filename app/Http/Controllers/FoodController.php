@@ -24,6 +24,10 @@ class FoodController extends Controller
         $foods = $query->paginate(6);
         $categories = \App\Models\Menu::all();
         
+        if ($request->wantsJson()) {
+            return view('home.partials.food_grid', compact('foods'))->render();
+        }
+
         return view('home.shop', compact('foods', 'categories'));
     }
 
@@ -37,7 +41,6 @@ class FoodController extends Controller
 
     public function addToCart(Request $request) {
        
-
         $user_id = FacadesAuth::user()->id;
         $food_id = $request->id;
 
@@ -52,6 +55,15 @@ class FoodController extends Controller
                 'food_id' => $food_id,
                 'quantity' => 1
             ]);
+        }
+        
+        if ($request->wantsJson()) {
+             $count = Cart::where('user_id', $user_id)->count();
+             return response()->json([
+                 'success' => true, 
+                 'message' => 'Item added to cart!',
+                 'cart_count' => $count
+             ]);
         }
 
         return redirect()->back()->with('success', 'Item added to cart!');
@@ -73,6 +85,10 @@ class FoodController extends Controller
             if($cart && $cart->user_id == $user_id) {
                 $cart->quantity += 1;
                 $cart->save();
+
+                if(request()->wantsJson()) {
+                    return $this->cartJsonResponse($user_id, $cart);
+                }
             }
         }
         return redirect()->back();
@@ -86,11 +102,10 @@ class FoodController extends Controller
                 if($cart->quantity > 1) {
                     $cart->quantity -= 1;
                     $cart->save();
-                } else {
-                    // Option: Remove if matches 1? Or just do nothing? 
-                    // User asked for "-" button, usually means decrement. 
-                    // To remove, they can use the remove button.
-                    // Keeping it at 1 minimum.
+                }
+                
+                if(request()->wantsJson()) {
+                    return $this->cartJsonResponse($user_id, $cart);
                 }
             }
         }
@@ -105,7 +120,36 @@ class FoodController extends Controller
                 $cart->delete();
             }
 
+            if(request()->wantsJson()) {
+                // Pass null as updated item since it's deleted
+                return $this->cartJsonResponse($user_id, null);
+            }
+
         return redirect()->back()->with('success', 'Item removed correctly');
+    }
+
+    private function cartJsonResponse($user_id, $updatedItem = null) {
+        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+        $total = 0;
+        foreach($cartItems as $item) {
+            $total += $item->food->price * $item->quantity;
+        }
+        $shipping = $total > 1000 ? 0 : 500;
+        $final = $total + $shipping;
+        $count = $cartItems->count();
+
+        return response()->json([
+            'success' => true,
+            'cart_count' => $count,
+            'subtotal' => $total,
+            'shipping' => $shipping,
+            'total' => $final,
+            'is_empty' => $count === 0,
+            // Item specific data (if valid)
+            'item_id' => $updatedItem ? $updatedItem->id : null,
+            'item_quantity' => $updatedItem ? $updatedItem->quantity : 0,
+            'item_total' => $updatedItem ? $updatedItem->food->price * $updatedItem->quantity : 0,
+        ]);
     }
 
     public function checkout() {
@@ -207,5 +251,16 @@ class FoodController extends Controller
             return redirect()->back()->with('success', 'Order cancelled successfully.');
         }
         return redirect()->back()->with('error', 'Order not found.');
+    }
+    public function sendMessage(Request $request) {
+        $contact = new \App\Models\Contact;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->message = $request->message;
+        $contact->save();
+
+        toastr()->closeButton(true)->success('Message sent successfully.');
+        return back();
     }
 }

@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg sticky-top bg-white border-bottom py-2">
     <div class="container px-3">
         <a class="navbar-brand d-flex align-items-center fw-bold text-brand gap-2" href="#">
-            <span class="material-symbols-outlined bg-brand p-2 rounded-3 fs-5 text-white">fastfood</span>
-            <span class="fs-4">FoodieDash</span>
+            <img src="{{ asset('images/logo.svg') }}" alt="Logo" width="40" height="40" class="rounded-circle">
+            <span class="fs-4">DineNexus</span>
         </a>
 
         <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">

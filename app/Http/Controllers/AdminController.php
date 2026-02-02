@@ -120,11 +120,39 @@ class AdminController extends Controller
     }
 
     public function customers() {
-        $customers = \App\Models\User::paginate(10);
-        $total_customers = \App\Models\User::count();
-        $new_customers_this_month = \App\Models\User::where('created_at', '>=', now()->subMonth())->count();
+        $customers = \App\Models\User::where('user_role', '!=', 'admin')->paginate(10);
+        $total_customers = \App\Models\User::where('user_role', '!=', 'admin')->count();
+        $new_customers_this_month = \App\Models\User::where('user_role', '!=', 'admin')->where('created_at', '>=', now()->subMonth())->count();
 
         return view('admin.customers', compact('customers', 'total_customers', 'new_customers_this_month'));
+    }
+
+    public function delete_customer($id) {
+        $user = \App\Models\User::findOrFail($id);
+        
+        // Prevent deleting other admins
+        if($user->user_role === 'admin') {
+             toastr()->closeButton(true)->error('Cannot delete an Administrator.');
+             return back();
+        }
+
+        $user->delete();
+        toastr()->closeButton(true)->success('Customer deleted successfully.');
+        return back();
+    }
+
+    public function messages() {
+        $messages = \App\Models\Contact::latest()->paginate(10);
+        return view('admin.messages', compact('messages'));
+    }
+
+    public function delete_message($id) {
+        $message = \App\Models\Contact::find($id);
+        if($message) {
+            $message->delete();
+            toastr()->closeButton(true)->success('Message deleted successfully.');
+        }
+        return back();
     }
 
     public function food(Request $request) {

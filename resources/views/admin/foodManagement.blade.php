@@ -50,7 +50,7 @@
                     <span class="material-symbols-outlined text-lg">edit</span>
                     Edit
                 </a>
-                <a href="{{ url('delete_food/'.$food->id) }}" class="flex items-center justify-center p-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all">
+                <a href="{{ url('delete_food/'.$food->id) }}" onclick="confirmation(event)" class="flex items-center justify-center p-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all">
                     <span class="material-symbols-outlined">delete</span>
                 </a>
             </div>

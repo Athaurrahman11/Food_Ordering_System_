@@ -16,16 +16,7 @@
 <h2 class="text-3xl font-black tracking-tight">Customer Management</h2>
 <p class="text-slate-500 dark:text-slate-400 text-base">Manage and monitor your registered user base and their activity.</p>
 </div>
-<div class="flex gap-3">
-<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark text-slate-700 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
-<span class="material-symbols-outlined text-lg">file_download</span>
-<span>Export</span>
-</button>
-<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
-<span class="material-symbols-outlined text-lg">person_add</span>
-<span>Add Customer</span>
-</button>
-</div>
+
 </div>
 
 
@@ -58,15 +49,19 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-50 dark:bg-slate-800/50 border-bottom border-slate-200 dark:border-border-dark">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">ID</th>
                         <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Customer Name</th>
                         <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Email</th>
                         <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Join Date</th>
-                        <th class="px-6 py-4"></th>
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-200 dark:divide-border-dark">
                     @foreach($customers as $customer)
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-600 dark:text-slate-300">
+                            #{{ $customer->id }}
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center gap-3">
                                 <div class="size-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
@@ -78,9 +73,10 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">{{ $customer->email }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">{{ $customer->created_at?->format('M d, Y') ?? 'N/A' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-slate-400">
-                            <button class="hover:text-primary transition-colors">
-                                <span class="material-symbols-outlined">more_vert</span>
-                            </button>
+                             <a href="{{ route('customer.delete', $customer->id) }}" onclick="confirmation(event)" class="inline-flex items-center gap-1 px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg text-xs font-bold transition-colors">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                                Delete
+                            </a>
                         </td>
                     </tr>
                     @endforeach

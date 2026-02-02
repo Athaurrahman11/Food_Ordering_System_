@@ -16,23 +16,16 @@
     @endphp
     <div class="group bg-[#2b2118] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#f48c25]/20 hover:-translate-y-2 transition-all duration-500 flex flex-col relative h-full border border-white/5">
         
-        <!-- Wishlist/Bag Icon (Top Right) -->
-        <button class="absolute top-4 right-4 z-30 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#f48c25] transition-all shadow-lg border border-white/10" title="Add to Wishlist">
-            <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
-        </button>
-
         <!-- Image Area -->
         <div class="relative w-full aspect-[4/3] bg-slate-800 isolate transform-gpu">
             <!-- Badges -->
             <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
-                    @if($isHot)
-                    <span class="bg-[#f48c25] text-white text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg uppercase tracking-wider flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[12px] filled">local_fire_department</span> Hot
+                    <span class="bg-white text-green-600 text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg uppercase tracking-wider flex items-center gap-1">
+                        {{ $food->category }}
                     </span>
-                    @endif
             </div>
             
-            <img src="{{ Str::startsWith($food->image, ['http', 'https']) ? $food->image : asset('Food_items/' . $food->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+            <img src="{{ Str::startsWith($food->image, ['http', 'https']) ? $food->image : asset('Food_items/' . $food->image) }}" class="w-full h-full object-cover">
             
             <!-- Dark Gradient Overlay at Bottom -->
             <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#2b2118] to-transparent"></div>
@@ -45,7 +38,7 @@
                 <span class="text-white font-black text-lg">${{ $food->price }}</span>
             </div>
             
-            <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-6 font-medium">{{ $description }}</p>
+
             
             <div class="mt-auto">
                 <form action="{{ route('cart.add') }}" method="POST">
@@ -54,8 +47,8 @@
                     <input type="hidden" name="price" value="{{ $food->price }}">
                     <input type="hidden" name="id" value="{{ $food->id }}">
                     
-                    <button type="submit" class="w-full bg-[#f48c25] text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#f48c25]/25 hover:bg-[#e07b1a] active:scale-95 transition-all duration-300">
-                            <span>Order Now</span> 
+                    <button type="submit" class="w-full bg-[#f48c25] text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#f48c25]/25 hover:bg-[#e07b1a] active:scale-95 transition-all duration-300 uppercase tracking-widest">
+                            <span>ADD TO CART</span> 
                             <span class="material-symbols-outlined text-[18px]">lunch_dining</span>
                     </button>
                 </form>

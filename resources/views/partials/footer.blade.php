@@ -4,11 +4,9 @@
 
              <!-- Brand -->
             <div class="lg:col-span-4 space-y-6">
-                <div class="flex items-center gap-3">
-                    <div class="bg-gradient-to-br from-orange-500 to-red-600 p-2.5 rounded-xl text-white shadow-lg shadow-orange-900/20">
-                        <span class="material-symbols-outlined text-2xl">restaurant</span>
-                    </div>
-                    <span class="text-3xl font-black text-white tracking-tight">Foodie<span class="text-orange-500">.</span></span>
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="{{ asset('images/logo.svg') }}" class="w-12 h-12 rounded-full shadow-lg shadow-orange-900/30">
+                    <span class="text-3xl font-black text-white tracking-tight">DineNexus<span class="text-orange-500">.</span></span>
                 </div>
                 <p class="text-slate-400 text-lg leading-relaxed pr-6 max-w-sm">
                     Delicious meals from your favorite local restaurants delivered straight to your door. Energetic, fast, and always fresh.
@@ -32,7 +30,7 @@
                 <ul class="space-y-4 font-medium text-slate-400">
                     <li><a href="#" class="hover:text-orange-500 transition-colors flex items-center gap-2 group"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></span> Offers Near Me</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition-colors flex items-center gap-2 group"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></span> Popular Restaurants</a></li>
-                    <li><a href="#" class="hover:text-orange-500 transition-colors flex items-center gap-2 group"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></span> New on Foodie</a></li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors flex items-center gap-2 group"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></span> New on DineNexus</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition-colors flex items-center gap-2 group"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></span> Gift Cards</a></li>
                 </ul>
             </div>
@@ -62,7 +60,7 @@
 
         <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p class="text-slate-500 text-sm font-medium">
-                © {{ date('Y') }} Foodie Inc. All rights reserved.
+                © {{ date('Y') }} DineNexus Inc. All rights reserved.
             </p>
             <div class="flex items-center gap-8 text-sm font-medium text-slate-500">
                 <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>

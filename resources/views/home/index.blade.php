@@ -50,36 +50,46 @@
         </div>
     </section>
 
-    <section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto">
+    <section class="py-24 px-6 lg:px-10 max-w-[1800px] mx-auto">
         <div class="text-center mb-16">
             <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">What's on your mind?</span>
             <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Featured <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">Categories</span></h2>
             <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
            
             @foreach ($featured_foods as $featured_food)
-                 <a href="{{ route('shop', ['category' => $featured_food->category]) }}" class="group relative bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col sm:flex-row h-full hover:-translate-y-1">
+                 <a href="{{ route('shop', ['category' => $featured_food->category]) }}" class="group relative h-[300px] md:w-[450px] lg:w-[550px] w-full rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-500 hover:-translate-y-2 isolate">
                     
-                    <!-- Image -->
-                    <div class="w-full sm:w-2/5 h-64 sm:h-auto overflow-hidden relative shrink-0">
-                         <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                         <img src="{{ asset('Menu_items/'.$featured_food->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    </div>
-
+                    <!-- Background Image -->
+                    <img src="{{ asset('Menu_items/'.$featured_food->image) }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <!-- Dark Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 transition-opacity"></div>
+                    
                     <!-- Content -->
-                    <div class="p-8 flex flex-col justify-center flex-1">
-                        <div class="mb-4">
-                            <h3 class="font-black text-3xl text-slate-900 mb-2 group-hover:text-[#f48c25] transition-colors">{{ $featured_food->category }}</h3>
-                            <p class="text-slate-500 font-body text-base leading-relaxed line-clamp-2">{{ $featured_food->description }}</p>
-                        </div>
-                        
-                        <div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-50">
-                            <span class="text-xs font-bold text-[#f48c25] uppercase tracking-wider">Order Now</span>
-                            <span class="w-12 h-12 rounded-full bg-slate-50 text-slate-900 flex items-center justify-center group-hover:bg-[#f48c25] group-hover:text-white transition-all shadow-sm group-hover:shadow-lg group-hover:shadow-orange-500/30">
-                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <!-- Category Badge -->
+                            <span class="inline-block bg-[#f48c25] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-lg shadow-orange-500/30">
+                                Featured
                             </span>
+                            
+                            <h3 class="font-black text-4xl text-white mb-3 leading-none tracking-tight">{{ $featured_food->category }}</h3>
+                            
+                            <!-- Description (Reveals on Hover) -->
+                            <p class="text-slate-300 font-body text-sm leading-relaxed line-clamp-2 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                {{ $featured_food->description }}
+                            </p>
+                            
+                            <!-- Action Button -->
+                            <div class="flex items-center gap-3 group/btn">
+                                <span class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover/btn:bg-[#f48c25] group-hover/btn:border-[#f48c25] transition-all duration-300">
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </span>
+                                <span class="text-white font-bold text-sm uppercase tracking-wider group-hover:text-[#f48c25] transition-colors">Explore Menu</span>
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -110,14 +120,14 @@
                 <div class="relative h-60 bg-slate-800 isolate transform-gpu">
                     <!-- Badges Container -->
                     <div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
-                         <!-- Veg/Non-Veg Badge -->
-                        <span class="bg-white/90 backdrop-blur text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider flex items-center gap-1 w-max border {{ $food->stock ? 'border-green-500 text-green-600' : 'border-red-500 text-red-600' }}">
-                            <span class="w-2 h-2 rounded-full {{ $food->stock ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                            Stock: {{ $food->stock }}
+                         <!-- Category Badge -->
+                        <span class="bg-white/90 backdrop-blur text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider flex items-center gap-1 w-max border border-orange-500 text-orange-600">
+                            <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                            {{ $food->category }}
                         </span>
                     </div>
                     
-                    <img src="{{ asset('Food_Items/'.$food->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <img src="{{ asset('Food_Items/'.$food->image) }}" class="w-full h-full object-cover   ">
                     
                     <!-- Dark Gradient -->
                     <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#2b2118] to-transparent"></div>
@@ -125,18 +135,16 @@
                 
                 <!-- Content -->
                 <div class="px-6 pb-6 pt-2 flex flex-col flex-1">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-xl text-white leading-tight group-hover:text-[#f48c25] transition-colors line-clamp-1">{{ $food->title }}</h3>
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="font-bold text-xl text-white leading-tight group-hover:text-[#f48c25] transition-colors line-clamp-2" title="{{ $food->name }}">{{ $food->name }}</h3>
                         <span class="text-[#f48c25] font-black text-xl">${{ $food->price }}</span>
                     </div>
                     
-                    <p class="text-sm text-gray-400 line-clamp-2 leading-relaxed mb-6">Delicious {{ strtolower($food->category) }} prepared fresh for you.</p>
-
                     <div class="mt-auto">
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{ $food->id }}">
-                            <input type="hidden" name="name" value="{{ $food->title }}">
+                            <input type="hidden" name="name" value="{{ $food->name }}">
                             <input type="hidden" name="price" value="{{ $food->price }}">
                             
                             <button type="submit" class="w-full bg-[#f48c25] text-white py-3.5 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#e07b1a] transition-all shadow-lg shadow-[#f48c25]/25 flex items-center justify-center gap-2 active:scale-95">
@@ -241,7 +249,7 @@
                 <div class="flex text-yellow-400 mb-6">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-slate-600 font-body italic mb-8">"Foodie is a lifesaver for busy weeknights. Great variety, amazing taste, and excellent service. Love the new app!"</p>
+                <p class="text-slate-600 font-body italic mb-8">"DineNexus is a lifesaver for busy weeknights. Great variety, amazing taste, and excellent service. Love the new app!"</p>
                 <div class="flex items-center gap-4">
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full">
                     <div>
@@ -269,7 +277,7 @@
     </section>
 
     <!-- App Download -->
-    <section class="py-24 bg-slate-900 relative overflow-hidden">
+    <section class="py-12 bg-slate-900 relative overflow-hidden">
         <!-- Floating shapes -->
         <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-[#f48c25] rounded-full blur-[120px] opacity-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
         <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[120px] opacity-10 translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
@@ -280,8 +288,8 @@
                 <!-- Left: Content -->
                 <div class="text-left">
                     <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Download App</span>
-                    <h2 class="text-4xl lg:text-6xl font-black text-white mb-6 leading-tight">Get The Full <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-orange-400">Foodie Experience</span></h2>
-                    <p class="text-slate-400 text-lg mb-10 max-w-lg font-body leading-relaxed">Order faster, track your food in real-time, and get exclusive discounts only on the Foodie mobile app. Available for iOS and Android.</p>
+                    <h2 class="text-4xl lg:text-6xl font-black text-white mb-6 leading-tight">Get The Full <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-orange-400">DineNexus Experience</span></h2>
+                    <p class="text-slate-400 text-lg mb-10 max-w-lg font-body leading-relaxed">Order faster, track your food in real-time, and get exclusive discounts only on the DineNexus mobile app. Available for iOS and Android.</p>
                     
                     <div class="flex flex-wrap gap-4">
                         <button class="bg-white text-slate-900 px-6 py-3.5 rounded-xl flex items-center gap-3 hover:bg-[#f48c25] hover:text-white transition-all shadow-lg hover:shadow-orange-500/30 group">
@@ -317,30 +325,30 @@
                 </div>
                 
                 <!-- Right: Mobile Image -->
-                <div class="relative lg:h-[600px] flex items-center justify-center">
+                <div class="relative lg:h-[450px] flex items-center justify-center">
                      <!-- Phone Frame Mockup -->
-                     <div class="relative z-10 w-[300px] h-[600px] bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl shadow-black/50 overflow-hidden transform rotate-6 hover:rotate-0 transition-transform duration-700 ease-out">
+                     <div class="relative z-10 w-[225px] h-[450px] bg-slate-900 rounded-[2.5rem] border-8 border-slate-800 shadow-2xl shadow-black/50 overflow-hidden transform rotate-6 hover:rotate-0 transition-transform duration-700 ease-out">
                          <!-- Screen Content -->
                          <img src="https://images.unsplash.com/photo-1542315184-7e5d0d626388?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80">
                          
                          <!-- Mock UI Elements -->
-                         <div class="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent p-6 flex flex-col justify-end">
-                             <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 mb-4">
+                         <div class="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-black/90 to-transparent p-4 flex flex-col justify-end">
+                             <div class="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10 mb-3">
                                  <div class="flex justify-between items-center mb-2">
-                                     <span class="text-white font-bold text-sm">Your Order</span>
-                                     <span class="text-[#f48c25] font-bold text-xs">On the way</span>
+                                     <span class="text-white font-bold text-xs">Your Order</span>
+                                     <span class="text-[#f48c25] font-bold text-[10px]">On the way</span>
                                  </div>
-                                 <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                 <div class="w-full bg-slate-700 h-1 rounded-full overflow-hidden">
                                      <div class="bg-[#f48c25] h-full w-3/4 animate-pulse"></div>
                                  </div>
                              </div>
-                             <h4 class="text-white font-black text-xl">Order #2938</h4>
-                             <p class="text-slate-400 text-xs">Arriving in 12 mins...</p>
+                             <h4 class="text-white font-black text-lg">Order #2938</h4>
+                             <p class="text-slate-400 text-[10px]">Arriving in 12 mins...</p>
                          </div>
                      </div>
                      
                      <!-- Back Phone Effect -->
-                     <div class="absolute z-0 w-[280px] h-[580px] bg-slate-800 rounded-[3rem] transform -rotate-6 translate-y-4 opacity-50 blur-sm"></div>
+                     <div class="absolute z-0 w-[210px] h-[435px] bg-slate-800 rounded-[2.5rem] transform -rotate-6 translate-y-4 opacity-50 blur-sm"></div>
                 </div>
             </div>
         </div>
