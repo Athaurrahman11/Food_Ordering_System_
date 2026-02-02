@@ -19,7 +19,7 @@
         <div class="mt-6 border-b border-slate-200 dark:border-slate-800 flex gap-8">
             <a class="flex items-center gap-2 border-b-2 border-primary text-primary pb-3 text-sm font-bold" href="#">
                 <span>All Items</span>
-                <span class="bg-primary/10 px-2 py-0.5 rounded text-[10px]">3</span>
+                <span class="bg-primary/10 px-2 py-0.5 rounded text-[10px]">{{ $menuitems->count() }}</span>
             </a>
          
         </div>
@@ -36,7 +36,7 @@
                         <a href="{{ url('edit_menu/'.$menuitem->id) }}" class="material-symbols-outlined text-sm filled-icon">edit</a>
                     </button>
                     <button class="p-2 bg-white/90 dark:bg-black/60 rounded-lg text-red-500 backdrop-blur-sm hover:bg-red-500 hover:text-white transition-colors">
-                        <a href="{{ url('delete_menu/'.$menuitem->id) }}" class="delete-btn material-symbols-outlined text-sm filled-icon ">delete</a>
+                        <a href="{{ url('delete_menu/'.$menuitem->id) }}" onclick="confirmation(event)" class="delete-btn material-symbols-outlined text-sm filled-icon ">delete</a>
                     </button>
                 </div>
 

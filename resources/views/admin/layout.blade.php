@@ -52,7 +52,7 @@
         </div>
         <div>
             <p class="text-xs font-bold text-primary mb-0.5">Welcome Back,</p>
-            <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">Food Admin</h1>
+            <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">{{ Auth::user()->name }}</h1>
             <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">Administrator</p>
         </div>
     </div>
@@ -78,23 +78,24 @@
 <span class="text-sm font-medium">Food</span>
 </a>
 
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('restaurants*') || request()->is('add_restaurant') ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800' }}" href="{{ url('restaurants') }}">
-<span class="material-symbols-outlined {{ request()->is('restaurants*') ? 'fill-[1]' : '' }}">storefront</span>
-<span class="text-sm font-medium">Restaurants</span>
-</a>
 
 <a class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('customers*') ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800' }}" href="{{ url('customers') }}">
 <span class="material-symbols-outlined {{ request()->is('customers*') ? 'fill-[1]' : '' }}">group</span>
 <span class="text-sm font-medium">Customers</span>
 </a>
 
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('messages*') ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800' }}" href="{{ url('messages') }}">
+<span class="material-symbols-outlined {{ request()->is('messages*') ? 'fill-[1]' : '' }}">mail</span>
+<span class="text-sm font-medium">Messages</span>
+</a>
+
 
 </nav>
 <div class="p-4 border-t border-slate-200 dark:border-border-dark">
-<button class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm">
-<span class="material-symbols-outlined text-sm">logout</span>
-                    Logout
-                </button>
+<form action="{{ route('logout') }}" method="post">
+    @csrf
+    <input type="submit" onclick="logout_confirmation(event)" class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm cursor-pointer" value="LOGOUT">
+</form>
 
 
               </div>
@@ -161,6 +162,11 @@
                     <span class="material-symbols-outlined {{ request()->is('customers*') ? 'fill-[1]' : '' }}">group</span>
                     <span class="text-sm font-medium">Customers</span>
                 </a>
+
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('messages*') ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800' }}" href="{{ url('messages') }}">
+                    <span class="material-symbols-outlined {{ request()->is('messages*') ? 'fill-[1]' : '' }}">mail</span>
+                    <span class="text-sm font-medium">Messages</span>
+                </a>
             </nav>
 
             <div class="p-4 border-t border-slate-200 dark:border-border-dark">
@@ -203,4 +209,49 @@
     overlay.addEventListener('click', toggleSidebar);
 </script>
 <script src="js/app.js"></script>
+
+<script type="text/javascript">
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');
+        console.log(urlToRedirect);
+        
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            width: 400,
+            padding: '1em',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = urlToRedirect;
+            }
+        });
+    }
+
+    function logout_confirmation(ev) {
+        ev.preventDefault();
+        var form = ev.target.closest('form');
+        
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out.",
+            icon: "warning",
+            width: 400,
+            padding: '1em',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    }
+</script>
 </body>

@@ -1,10 +1,8 @@
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg px-6 py-4 lg:px-20 border-b border-slate-100/50 flex justify-between items-center transition-all duration-300">
 
-    <a href="{{ route('user.home') }}" class="flex items-center gap-3 group">
-        <div class="bg-[#f48c25] p-2 rounded-xl text-white shadow-lg shadow-[#f48c25]/30 group-hover:rotate-6 transition-transform duration-300">
-            <span class="material-symbols-outlined text-2xl leading-none">restaurant</span>
-        </div>
-        <span class="text-2xl font-black text-[#1c140d] tracking-tight">Foodie</span>
+    <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+        <img src="{{ asset('images/logo.svg') }}" class="w-10 h-10 rounded-full shadow-lg shadow-orange-500/20 group-hover:scale-110 transition-transform">
+        <span class="text-2xl font-black text-[#1c140d] tracking-tight">DineNexus</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-10 text-sm font-bold">
