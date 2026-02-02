@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Menu;
 use App\Models\Food;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -19,14 +21,12 @@ class AdminController extends Controller
         $total_food_items = Food::count();
         $total_menu_items = Menu::count();
 
-        // Calculate Category Distribution
         $top_categories = Food::selectRaw('category, count(*) as count')
             ->groupBy('category')
             ->orderByDesc('count')
             ->take(3)
             ->get();
         
-        // Calculate percentages
         $total_food = $total_food_items > 0 ? $total_food_items : 1;
         foreach($top_categories as $cat) {
             $cat->percentage = round(($cat->count / $total_food) * 100);
@@ -120,17 +120,16 @@ class AdminController extends Controller
     }
 
     public function customers() {
-        $customers = \App\Models\User::where('user_role', '!=', 'admin')->paginate(10);
-        $total_customers = \App\Models\User::where('user_role', '!=', 'admin')->count();
-        $new_customers_this_month = \App\Models\User::where('user_role', '!=', 'admin')->where('created_at', '>=', now()->subMonth())->count();
+        $customers = User::where('user_role', '!=', 'admin')->paginate(10);
+        $total_customers = User::where('user_role', '!=', 'admin')->count();
+        $new_customers_this_month = User::where('user_role', '!=', 'admin')->where('created_at', '>=', now()->subMonth())->count();
 
         return view('admin.customers', compact('customers', 'total_customers', 'new_customers_this_month'));
     }
 
     public function delete_customer($id) {
-        $user = \App\Models\User::findOrFail($id);
+        $user =User::findOrFail($id);
         
-        // Prevent deleting other admins
         if($user->user_role === 'admin') {
              toastr()->closeButton(true)->error('Cannot delete an Administrator.');
              return back();
@@ -142,12 +141,12 @@ class AdminController extends Controller
     }
 
     public function messages() {
-        $messages = \App\Models\Contact::latest()->paginate(10);
+        $messages = Contact::latest()->paginate(10);
         return view('admin.messages', compact('messages'));
     }
 
     public function delete_message($id) {
-        $message = \App\Models\Contact::find($id);
+        $message = Contact::find($id);
         if($message) {
             $message->delete();
             toastr()->closeButton(true)->success('Message deleted successfully.');
@@ -187,17 +186,15 @@ class AdminController extends Controller
     public function store_food(Request $request)
     {
         $food = new Food;
-        $food->name = $request->input('name'); // Assuming input name is 'name'
+        $food->name = $request->input('name'); 
         
         $menuId = $request->input('menu_id');
         $food->menu_id = $menuId;
         
-        // Populate legacy category string from the Menu model
         $menu = Menu::find($menuId);
         if ($menu) {
             $food->category = $menu->category;
         } else {
-             // Fallback if somehow menu not found, though constraint should prevent this
              $food->category = 'Uncategorized'; 
         }
         $food->price = $request->input('price');
@@ -206,7 +203,7 @@ class AdminController extends Controller
         $image = $request->file('image');
         if($image){
             $image_name = time().'.'.$image->getClientOriginalExtension();
-            $image->move('Food_items', $image_name); // Different folder for food? or same? Let's use Food_items
+            $image->move('Food_items', $image_name); 
             $food->image = $image_name;
         }
 
@@ -218,7 +215,7 @@ class AdminController extends Controller
     public function edit_food($id)
     {
         $food = Food::findOrFail($id);
-        $items = Menu::all(); // Need categories for the dropdown
+        $items = Menu::all(); 
         return view('admin.edit_food', compact('food', 'items'));
     }
 
@@ -230,12 +227,10 @@ class AdminController extends Controller
         $menuId = $request->input('menu_id');
         $food->menu_id = $menuId;
         
-        // Populate legacy category string from the Menu model
         $menu = Menu::find($menuId);
         if ($menu) {
             $food->category = $menu->category;
         } else {
-             // Fallback if somehow menu not found, though constraint should prevent this
              $food->category = 'Uncategorized'; 
         }
         $food->price = $request->input('price');

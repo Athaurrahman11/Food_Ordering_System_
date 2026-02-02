@@ -21,7 +21,7 @@ class StripeController extends Controller
                         'product_data' => [
                             'name' => 'Food Order #' . $order_id,
                         ],
-                        'unit_amount' => $amount * 100, // Amount in cents
+                        'unit_amount' => $amount * 100, 
                     ],
                     'quantity' => 1,
                 ]],
@@ -33,7 +33,6 @@ class StripeController extends Controller
             return redirect()->away($checkout_session->url);
             
         } catch (\Exception $e) {
-            // Log the error for debugging if needed: \Log::error($e->getMessage());
             return redirect()->route('checkout')->with('error', 'Payment initialization failed. Please try again or use Cash on Delivery. Error: ' . $e->getMessage());
         }
 

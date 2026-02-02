@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Contact;
 use App\Models\Food;
 use App\Models\Menu;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
@@ -15,14 +17,14 @@ class FoodController extends Controller
 {
     // Show the Menu Page
     public function index(Request $request) {
-        $query = \App\Models\Food::query();
+        $query = Food::query();
 
         if ($request->has('category')) {
             $query->where('category', $request->category);
         }
 
         $foods = $query->paginate(6);
-        $categories = \App\Models\Menu::all();
+        $categories =Menu::all();
         
         if ($request->wantsJson()) {
             return view('home.partials.food_grid', compact('foods'))->render();
@@ -31,7 +33,6 @@ class FoodController extends Controller
         return view('home.shop', compact('foods', 'categories'));
     }
 
-    // Show Home Page with Featured Items
     public function home() {
         $featured_foods = Menu::take(6)->get(); 
         $food_items=Food::take(6)->get();
@@ -73,7 +74,7 @@ class FoodController extends Controller
         
         
         $user_id = FacadesAuth::user()->id;
-        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+        $cartItems = Cart::where('user_id', $user_id)->with('food')->get();
         
         return view('home.cart', compact('cartItems'));
     }
@@ -95,8 +96,8 @@ class FoodController extends Controller
     }
 
     public function decrementCart($id) {
-        if(\Illuminate\Support\Facades\Auth::check()) {
-            $user_id = \Illuminate\Support\Facades\Auth::id();
+        if(FacadesAuth::check()) {
+            $user_id = FacadesAuth::id();
             $cart = \App\Models\Cart::find($id);
             if($cart && $cart->user_id == $user_id) {
                 if($cart->quantity > 1) {
@@ -121,7 +122,6 @@ class FoodController extends Controller
             }
 
             if(request()->wantsJson()) {
-                // Pass null as updated item since it's deleted
                 return $this->cartJsonResponse($user_id, null);
             }
 
@@ -129,7 +129,7 @@ class FoodController extends Controller
     }
 
     private function cartJsonResponse($user_id, $updatedItem = null) {
-        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+        $cartItems = Cart::where('user_id', $user_id)->with('food')->get();
         $total = 0;
         foreach($cartItems as $item) {
             $total += $item->food->price * $item->quantity;
@@ -145,7 +145,6 @@ class FoodController extends Controller
             'shipping' => $shipping,
             'total' => $final,
             'is_empty' => $count === 0,
-            // Item specific data (if valid)
             'item_id' => $updatedItem ? $updatedItem->id : null,
             'item_quantity' => $updatedItem ? $updatedItem->quantity : 0,
             'item_total' => $updatedItem ? $updatedItem->food->price * $updatedItem->quantity : 0,
@@ -166,11 +165,10 @@ class FoodController extends Controller
     }
 
     public function placeOrder(Request $request) {
-        if(!\Illuminate\Support\Facades\Auth::check()) {
+        if(FacadesAuth::check()) {
             return redirect()->route('login');
         }
 
-        // Validate request
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
@@ -178,9 +176,8 @@ class FoodController extends Controller
             'payment_method' => 'required|in:cod,card'
         ]);
 
-        // Calculate Total Amount
-        $user_id = \Illuminate\Support\Facades\Auth::id();
-        $cartItems = \App\Models\Cart::where('user_id', $user_id)->with('food')->get();
+        $user_id = FacadesAuth::id();
+        $cartItems = Cart::where('user_id', $user_id)->with('food')->get();
         $total = 0;
         foreach($cartItems as $item) {
             $total += $item->food->price * $item->quantity;
@@ -188,8 +185,7 @@ class FoodController extends Controller
         $shipping = $total > 200 ? 0 : 100;
         $final_amount = $total + $shipping;
 
-        // Create Order
-        $order = new \App\Models\Order();
+        $order = new Order();
         $order->customer_name = $request->name;
         $order->phone = $request->phone;
         $order->address = $request->address;
@@ -198,9 +194,8 @@ class FoodController extends Controller
         $order->price = $final_amount;
         $order->save();
 
-        // Save Order Items
         foreach($cartItems as $item) {
-            $orderItem = new \App\Models\OrderItem();
+            $orderItem = new OrderItem();
             $orderItem->order_id = $order->id;
             $orderItem->food_id = $item->food_id;
             $orderItem->quantity = $item->quantity;
@@ -209,27 +204,25 @@ class FoodController extends Controller
         }
 
         if ($request->payment_method == 'card') {
-            $stripe = new \App\Http\Controllers\StripeController();
+            $stripe = new StripeController();
             return $stripe->pay($order->id, $final_amount);
         }
 
-        // If Cash On Delivery (or other future methods)
-        // Clear the cart from DB
-        \App\Models\Cart::where('user_id', $user_id)->delete();
+     
+        Cart::where('user_id', $user_id)->delete();
 
         return redirect()->route('user.home')->with('success', 'Order placed successfully! Thank you for ordering.');
     }
 
     public function orderSuccess(Request $request) {
         if($request->has('order_id')) {
-            $order = \App\Models\Order::find($request->order_id);
+            $order = Order::find($request->order_id);
             if($order) {
                 $order->status = 'Paid'; // Or Confirmed
                 $order->save();
                 
-                // Clear Cart
                 $user_id = $order->user_id;
-                \App\Models\Cart::where('user_id', $user_id)->delete();
+                Cart::where('user_id', $user_id)->delete();
                 
                 return redirect()->route('user.home')->with('success', 'Payment Successful! Your order #' . $order->id . ' has been placed.');
             }
@@ -245,15 +238,15 @@ class FoodController extends Controller
     }
 
     public function cancelOrder($id) {
-        $order = \App\Models\Order::find($id);
-        if($order && $order->user_id == \Illuminate\Support\Facades\Auth::id()) {
+        $order = Order::find($id);
+        if($order && $order->user_id == FacadesAuth::id()) {
             $order->delete();
             return redirect()->back()->with('success', 'Order cancelled successfully.');
         }
         return redirect()->back()->with('error', 'Order not found.');
     }
     public function sendMessage(Request $request) {
-        $contact = new \App\Models\Contact;
+        $contact = new Contact;
         $contact->name = $request->name;
         $contact->email = $request->email;
         $contact->phone = $request->phone;

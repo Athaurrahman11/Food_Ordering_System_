@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="relative min-h-screen pt-32 pb-20 px-6 lg:px-20 max-w-[1440px] mx-auto">
-    
-    <!-- Background Elements -->
+
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 -z-10"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100/30 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 -z-10"></div>
 
@@ -16,7 +15,7 @@
     @if($orders->count() > 0)
     <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden relative">
         <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-50 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        
+
         <div class="overflow-x-auto relative z-10">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -42,12 +41,12 @@
                         <td class="p-6 font-bold text-slate-900">
                             {{ $order->address }}
                         </td>
-                        
+
                         <td class="p-6 font-bold text-[#f48c25]">
                             ${{ number_format($order->price, 2) }}
                         </td>
 
-                       
+
                         <td class="p-6">
                             <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide
                                 {{ $order->status == 'Pending' ? 'bg-amber-100 text-amber-600' : '' }}
@@ -56,13 +55,13 @@
                                 {{ $order->status == 'Preparing' ? 'bg-purple-100 text-purple-600' : '' }}
                             ">
                                 @if($order->status == 'Pending')
-                                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                                 @elseif($order->status == 'Paid' || $order->status == 'Confirmed')
-                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                <span class="material-symbols-outlined text-sm">check_circle</span>
                                 @elseif($order->status == 'Delivered')
-                                    <span class="material-symbols-outlined text-sm">local_shipping</span>
+                                <span class="material-symbols-outlined text-sm">local_shipping</span>
                                 @elseif($order->status == 'Preparing')
-                                    <span class="material-symbols-outlined text-sm">soup_kitchen</span>
+                                <span class="material-symbols-outlined text-sm">soup_kitchen</span>
                                 @endif
                                 {{ $order->status }}
                             </span>
@@ -74,8 +73,8 @@
                         </td>
                     </tr>
                     @endforeach
-                
-                
+
+
                 </tbody>
             </table>
         </div>

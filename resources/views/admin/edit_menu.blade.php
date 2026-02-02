@@ -49,7 +49,6 @@
                         </div>
 
                     </div>
-                    <!-- Action Buttons -->
                     <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-100 dark:border-gray-800">
                         <a href="{{ route('menu') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">
                             Cancel

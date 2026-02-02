@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foodie - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
     </style>
 </head>
+
 <body class="bg-[#f8f7f5] text-[#1c140d]">
 
     @include('partials.header')
 
     <section class="p-6 lg:px-20 lg:py-10">
         <div class="rounded-[2.5rem] bg-[#1c140d] min-h-[550px] flex items-center p-8 lg:p-16 text-white relative overflow-hidden"
-             style="background-image: linear-gradient(to right, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200'); background-size: cover;">
+            style="background-image: linear-gradient(to right, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200'); background-size: cover;">
             <div class="max-w-xl relative z-10">
                 <h1 class="text-5xl lg:text-7xl font-black mb-6 leading-tight">Crave It.<br>Order It.<br><span class="text-[#f48c25]">Enjoy It.</span></h1>
                 <p class="text-lg mb-8 opacity-90">Delicious meals from your favorite local restaurants delivered straight to your door. Fresh, fast, and always flavorful.</p>
@@ -76,4 +80,5 @@
     @include('partials.footer')
 
 </body>
+
 </html>

@@ -2,10 +2,8 @@
 
 @section('content')
 
-<!-- Main Content -->
 <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-    <!-- Dashboard Content -->
     <div class="p-8 overflow-y-auto">
         <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
             <div class="flex flex-col gap-1">
@@ -14,7 +12,6 @@
             </div>
         </div>
 
-        <!-- Messages Table -->
         <div class="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-border-dark overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -56,7 +53,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Pagination Footer -->
             <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-border-dark flex items-center justify-between">
                 <div class="mt-4">
                     {{ $messages->links() }}

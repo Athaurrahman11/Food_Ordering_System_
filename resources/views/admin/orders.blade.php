@@ -5,11 +5,6 @@
 
 <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-
-
-
-
-
     <div class="p-8 overflow-y-auto">
         <div>
             <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Order Management</h2>
@@ -31,7 +26,6 @@
             <div class="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-border-dark">
                 <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">In Progress</p>
                 <div class="flex items-end justify-between mt-2">
-                    <!-- Assuming 'Preparing' is considered In Progress for stats -->
                     <h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-none">{{ number_format($in_progress_orders) }}</h3>
                 </div>
             </div>

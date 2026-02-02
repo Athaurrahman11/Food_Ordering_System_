@@ -10,7 +10,7 @@
             </div>
             <div class="flex items-center gap-3">
 
-                <a href="{{ url('add_menu') }}" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer" >
+                <a href="{{ url('add_menu') }}" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 cursor-pointer">
                     <span class="material-symbols-outlined text-sm">add</span>
                     Add Item for menu
                 </a>
@@ -21,7 +21,7 @@
                 <span>All Items</span>
                 <span class="bg-primary/10 px-2 py-0.5 rounded text-[10px]">{{ $menuitems->count() }}</span>
             </a>
-         
+
         </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
@@ -57,7 +57,7 @@
         </div>
         @endforeach
 
-      
+
 
 
 
@@ -79,4 +79,3 @@
 
 
 @endsection
-
