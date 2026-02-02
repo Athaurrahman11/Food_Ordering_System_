@@ -56,7 +56,7 @@
             <div class="p-6">
                 <div class="flex items-center gap-3">
                     <div class="relative">
-                        <img class="w-14 h-14 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/admin_image/dark_admin.jpeg') }}" alt="Admin Profile" />
+                        <img class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/admin_image/dark_admin.jpeg') }}" alt="Admin Profile" />
                         <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
                     </div>
                     <div>
