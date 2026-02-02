@@ -18,6 +18,8 @@ class AccessMiddleware
     {
         if(Auth::user()->user_role ==="admin"){
             return redirect()->route('admin_dashboard');
+        }else{
+            return redirect()->route('home');
         }
         return $next($request);
     }

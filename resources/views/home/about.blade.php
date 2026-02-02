@@ -64,7 +64,7 @@
              <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                  <div class="order-2 lg:order-1">
                      <div class="relative">
-                         <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="rounded-[3rem] shadow-2xl rotate-[-3deg] border-4 border-white/10 hover:rotate-0 transition-transform duration-500">
+                         <img src="{{ asset('images/story_image.avif') }}" class="rounded-[3rem] shadow-2xl rotate-[-3deg] border-4 border-white/10 hover:rotate-0 transition-transform duration-500">
                          <div class="absolute -bottom-10 -right-10 bg-white p-6 rounded-[2rem] shadow-xl hidden md:block animate-bounce">
                              <div class="text-slate-900 font-black text-4xl">100%</div>
                              <div class="text-[#f48c25] font-bold uppercase tracking-wider text-xs">Organic</div>
@@ -141,7 +141,7 @@
              <!-- Team Member 2 -->
              <div class="group relative mt-12 md:mt-0">
                 <div class="h-[400px] rounded-[2.5rem] overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
+                    <img src="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
                     
                     <div class="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">

@@ -9,7 +9,7 @@
     <section class="relative min-h-[50vh] flex items-center justify-center pt-32 pb-20 overflow-hidden">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" class="w-full h-full object-cover scale-105 animate-pulse" style="animation-duration: 20s">
+            <img src="{{ asset('images/contact_image.avif') }}" class="w-full h-full object-cover scale-105 animate-pulse" style="animation-duration: 20s">
             <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-[#fffbf7] via-transparent to-transparent"></div>
         </div>
