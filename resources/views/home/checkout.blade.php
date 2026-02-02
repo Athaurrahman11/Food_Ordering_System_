@@ -14,6 +14,13 @@
     </div>
 
     @if($cartItems->count() > 0)
+    @php
+        $total = 0;
+        foreach($cartItems as $item) {
+            $total += $item->food->price * $item->quantity;
+        }
+        $shipping = $total > 1000 ? 0 : 500;
+    @endphp
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         <!-- Left Side: Address Form -->
@@ -31,25 +38,21 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2 group/input">
-                            <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
-                            <input type="text" name="name" required placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400">
+                            <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1" value> Name</label>
+                            <input type="text" name="name" required placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400" value="{{ $user_detail->name }}">
                         </div>
                         <div class="space-y-2 group/input">
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Phone Number</label>
-                            <input type="tel" name="phone" required placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400">
+                            <input type="tel" name="phone" required placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400" value="{{ $user_detail->phone_number }}">
                         </div>
                     </div>
 
                     <div class="space-y-2 group/input">
                         <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Delivery Address</label>
-                        <textarea name="address" required rows="3" placeholder="Apartment, Street Address, City" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 resize-none"></textarea>
+                        <textarea name="address" required rows="3" placeholder="Apartment, Street Address, City" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 resize-none">{{ $user_detail->address }}</textarea>
                     </div>
 
-                    <div class="space-y-2 group/input">
-                        <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Order Notes (Optional)</label>
-                        <textarea name="notes" rows="2" placeholder="Any special instructions for delivery?" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_4px_15px_-3px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 resize-none"></textarea>
-                    </div>
-
+          
                     <div class="h-px bg-slate-100 my-6"></div>
 
                     <h3 class="font-black text-2xl text-slate-900 mb-6 flex items-center gap-3">
@@ -58,29 +61,22 @@
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+
                         <label class="relative cursor-pointer group">
-                            <input type="radio" name="payment_method" value="cod" checked class="peer sr-only">
+                            <input type="radio" name="payment_method" value="card" class="peer sr-only" checked>
                             <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white peer-checked:border-[#f48c25] peer-checked:bg-orange-50/50 transition-all hover:border-orange-200">
                                 <div class="flex items-center gap-3 mb-2">
-                                    <span class="material-symbols-outlined text-[#f48c25]">payments</span>
-                                    <span class="font-bold text-slate-900">Cash on Delivery</span>
+                                    <span class="material-symbols-outlined text-slate-400">credit_card</span>
+                                    <span class="font-bold text-slate-900">Online Payment</span>
                                 </div>
-                                <p class="text-xs text-slate-500">Pay when you receive your order.</p>
+                                <p class="text-xs text-slate-500">Pay securely with Stripe</p>
                             </div>
                             <div class="absolute top-5 right-5 w-4 h-4 rounded-full border-2 border-slate-300 peer-checked:border-[#f48c25] peer-checked:bg-[#f48c25] transition-colors"></div>
                         </label>
-
-                        <label class="relative cursor-pointer group opacity-60 grayscale cursor-not-allowed">
-                            <input type="radio" name="payment_method" value="card" disabled class="peer sr-only">
-                            <div class="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 transition-all">
-                                <div class="flex items-center gap-3 mb-2">
-                                    <span class="material-symbols-outlined text-slate-400">credit_card</span>
-                                    <span class="font-bold text-slate-400">Online Payment</span>
-                                </div>
-                                <p class="text-xs text-slate-400">Coming Soon</p>
-                            </div>
-                        </label>
                     </div>
+                    
+                    <input type="hidden" name="amount" value="{{ $total + $shipping }}">
 
                 </form>
             </div>
@@ -92,9 +88,9 @@
                 <h3 class="font-black text-xl text-slate-900 mb-6">Order Summary</h3>
                 
                 <div class="max-h-[300px] overflow-y-auto pr-2 space-y-4 mb-6 custom-scrollbar">
-                    @php $total = 0; @endphp
+
                     @foreach($cartItems as $item)
-                    @php $total += $item->food->price * $item->quantity; @endphp
+
                     <div class="flex items-center gap-4 py-2">
                          <div class="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0 overflow-hidden">
                             @if($item->food->image)
@@ -112,9 +108,7 @@
                     @endforeach
                 </div>
 
-                @php
-                    $shipping = $total > 1000 ? 0 : 500;
-                @endphp
+
 
                 <div class="space-y-3 mb-8 pt-6 border-t border-slate-100">
                     <div class="flex justify-between items-center text-slate-500 text-sm font-medium">
@@ -136,7 +130,7 @@
                     </div>
                 </div>
 
-                <button onclick="document.getElementById('checkout-form').submit();" class="w-full bg-[#f48c25] text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-orange-600 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 group">
+                <button type="button" onclick="document.getElementById('checkout-form').submit();" class="w-full bg-[#f48c25] text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-orange-600 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 group">
                     <span>Place Order</span>
                     <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">check_circle</span>
                 </button>

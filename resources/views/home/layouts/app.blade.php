@@ -92,7 +92,7 @@
           @endauth
         </a>
 
-        <a href="{{ route('login') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">My Orders</a>
+        <a href="{{ route('my_orders') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30">My Orders</a>
         
         <form action="{{ route('logout') }}" method="post">
           @csrf
