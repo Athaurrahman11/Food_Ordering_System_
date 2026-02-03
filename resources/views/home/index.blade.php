@@ -156,57 +156,8 @@
 </section>
 
 <section class="py-24 bg-[#fff8f2] relative w-full overflow-hidden">
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-100/60 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-100/40 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
-
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-20 relative z-10 w-full">
-        <div class="text-center mb-16">
-            <span class="text-[#f48c25] font-bold uppercase tracking-widest text-xs mb-3 block">Why Choose Us</span>
-            <h2 class="text-4xl lg:text-5xl font-black text-slate-900">We Serve <span class="text-[#f48c25]">Passion</span></h2>
-            <div class="w-80 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-orange-500/5 hover:-translate-y-2 transition-all duration-300 group border border-orange-100/50">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-[#f48c25] shadow-sm mb-6 group-hover:bg-[#f48c25] group-hover:text-white transition-colors">
-                    <span class="material-symbols-outlined text-3xl">eco</span>
-                </div>
-                <h3 class="font-black text-xl mb-3 text-slate-900">Fresh Ingredients</h3>
-                <p class="text-slate-500 font-body text-sm leading-relaxed">We use only the freshest, locally sourced organic ingredients.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-orange-500/5 hover:-translate-y-2 transition-all duration-300 group border border-orange-100/50">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-[#f48c25] shadow-sm mb-6 group-hover:bg-[#f48c25] group-hover:text-white transition-colors">
-                    <span class="material-symbols-outlined text-3xl">rocket_launch</span>
-                </div>
-                <h3 class="font-black text-xl mb-3 text-slate-900">Fast Delivery</h3>
-                <p class="text-slate-500 font-body text-sm leading-relaxed">Hot and fresh food delivered to your door in record time.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-orange-500/5 hover:-translate-y-2 transition-all duration-300 group border border-orange-100/50">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-[#f48c25] shadow-sm mb-6 group-hover:bg-[#f48c25] group-hover:text-white transition-colors">
-                    <span class="material-symbols-outlined text-3xl">soup_kitchen</span>
-                </div>
-                <h3 class="font-black text-xl mb-3 text-slate-900">Hygienic Cooking</h3>
-                <p class="text-slate-500 font-body text-sm leading-relaxed">Our kitchens adhere to strict safety and hygiene standards.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-orange-500/5 hover:-translate-y-2 transition-all duration-300 group border border-orange-100/50">
-                <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-[#f48c25] shadow-sm mb-6 group-hover:bg-[#f48c25] group-hover:text-white transition-colors">
-                    <span class="material-symbols-outlined text-3xl">savings</span>
-                </div>
-                <h3 class="font-black text-xl mb-3 text-slate-900">Affordable Prices</h3>
-                <p class="text-slate-500 font-body text-sm leading-relaxed">Gourmet quality food at prices that won't break the bank.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<section class="py-24 px-6 lg:px-20 max-w-[1440px] mx-auto bg-slate-50">
     <div class="text-center mb-16">
-        <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Customer <span class="text-[#f48c25]">Love</span></h2>
+        <h2 class="text-4xl lg:text-5xl font-black text-slate-900">Customer <span class="text-red-600">Love</span></h2>
         <div class="w-60 h-1.5 bg-[#f48c25] rounded-full mt-4 mx-auto"></div>
     </div>
 
@@ -253,7 +204,12 @@
             </div>
         </div>
     </div>
+
 </section>
+
+
+
+
 
 <section class="py-12 bg-slate-900 relative overflow-hidden">
     <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-[#f48c25] rounded-full blur-[120px] opacity-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
