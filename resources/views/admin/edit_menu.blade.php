@@ -28,24 +28,24 @@
                                 <p class="text-gray-900 dark:text-white text-lg font-bold">Upload Menu Image</p>
                             </div>
                             <input type="file" class="px-6 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" name="image" />
-                            
+
                         </div>
                     </div>
 
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            
+
 
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300" >Category</label>
-                            <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" value="{{ $menu_item->category }}" placeholder="Enter Category " type="text" name="category"/>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Category</label>
+                            <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" value="{{ $menu_item->category }}" placeholder="Enter Category " type="text" name="category" required />
                         </div>
 
                         <div class="md:col-span-2 space-y-2">
                             <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="description" >{{ $menu_item->description }}
-    </textarea>
+                            <textarea class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="description" required>{{ $menu_item->description }}
+                            </textarea>
                         </div>
 
                     </div>
@@ -54,7 +54,7 @@
                             Cancel
                         </a>
                         <button class="px-8 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary/90 transition-colors flex items-center gap-2" type="submit">
-                            <i  class="material-symbols-outlined text-sm" >save</i>
+                            <i class="material-symbols-outlined text-sm">save</i>
                             Update Item
                         </button>
                     </div>

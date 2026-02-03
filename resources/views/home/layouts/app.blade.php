@@ -77,7 +77,7 @@
           <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
           @auth
           @php
-          $count = \App\Models\Cart::where('user_id', Auth::id())->count();
+          $count = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
           @endphp
           @if($count > 0)
           <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white">
@@ -89,7 +89,7 @@
 
         <a href="{{ route('my_orders') }}" class="hidden lg:flex items-center justify-center bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30 h-10">My Orders</a>
 
-        <form action="{{ route('logout') }}" method="post" class="hidden lg:flex">
+        <form action="{{ route('logout') }}" method="post" class="hidden lg:flex items-center">
           @csrf
           <button type="submit" class="flex items-center justify-center bg-[#f48c25] hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30 h-10">Logout</button>
         </form>

@@ -45,6 +45,12 @@ class AdminController extends Controller
     }
 
       public function menu_store(Request $request){
+        $request->validate([
+            'category' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $menuItem=new Menu;
         $menuItem->category=$request->input('category');
         $menuItem->description=$request->input('description');
@@ -88,6 +94,12 @@ class AdminController extends Controller
     }
 
     public function update_menu(Request $request,$id){
+        $request->validate([
+            'category' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $menu_item=Menu::findOrFail($id);
         $menu_item->category=$request->category;
         $menu_item->description=$request->description;
@@ -185,6 +197,14 @@ class AdminController extends Controller
 
     public function store_food(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'menu_id' => 'required|exists:menus,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $food = new Food;
         $food->name = $request->input('name'); 
         
@@ -221,6 +241,14 @@ class AdminController extends Controller
 
     public function update_food(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'menu_id' => 'required|exists:menus,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
         $food = Food::findOrFail($id);
         $food->name = $request->input('name');
         

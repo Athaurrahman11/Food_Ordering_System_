@@ -105,15 +105,13 @@
                         @endforeach
                     </div>
                 </div>
-                <button class="w-full mt-6 py-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                    View Detailed Reports
-                </button>
+                
             </div>
         </div>
         <div class="mt-8 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                 <h3 class="font-bold text-lg">Recent Orders</h3>
-                <button class="text-primary text-sm font-bold hover:underline">View All Orders</button>
+                <a  href="{{ route('orders') }}" class="text-primary text-sm font-bold hover:underline">View All Orders</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left">

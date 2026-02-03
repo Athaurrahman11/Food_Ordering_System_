@@ -1,9 +1,9 @@
 @extends('home.layouts.app')
+@section('content')
 <div class="fixed inset-0 z-0 pointer-events-none opacity-40">
     <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-orange-100/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
     <div class="absolute bottom-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
 </div>
-@section('content')
 <section class="relative min-h-[50vh] flex items-center justify-center pt-32 pb-20 overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img src="{{ asset('images/contact_image.avif') }}" class="w-full h-full object-cover scale-105 animate-pulse" style="animation-duration: 20s">

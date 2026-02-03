@@ -36,7 +36,7 @@
                 <h3 class="font-black text-lg mb-4 text-slate-800">Search</h3>
                 <div class="relative group">
                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#f48c25] transition-colors">search</span>
-                    <input type="text" placeholder="Search pizza, burgers..." class="w-full pl-12 pr-4 py-4 bg-slate-50 rounded-2xl text-xs font-bold outline-none border border-slate-100 focus:border-[#f48c25] focus:bg-white focus:shadow-[0_0_0_4px_rgba(244,140,37,0.1)] transition-all placeholder:text-slate-400 text-slate-800">
+                    <input type="text" id="searchInput" value="{{ request('search') }}" placeholder="Search pizza, burgers..." class="w-full pl-12 pr-4 py-4 bg-slate-50 rounded-2xl text-xs font-bold outline-none border border-slate-100 focus:border-[#f48c25] focus:bg-white focus:shadow-[0_0_0_4px_rgba(244,140,37,0.1)] transition-all placeholder:text-slate-400 text-slate-800">
                 </div>
             </div>
 
@@ -199,6 +199,26 @@
 
         window.addEventListener('popstate', () => {
             fetchGrid(window.location.href);
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        let timeout = null;
+
+        searchInput.addEventListener('input', function(e) {
+            clearTimeout(timeout);
+            const value = e.target.value;
+
+            timeout = setTimeout(() => {
+                const url = new URL(window.location.href);
+                if (value) {
+                    url.searchParams.set('search', value);
+                } else {
+                    url.searchParams.delete('search');
+                }
+                url.searchParams.delete('page');
+
+                fetchGrid(url.toString());
+            }, 300);
         });
     });
 </script>
