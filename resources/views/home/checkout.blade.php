@@ -18,7 +18,7 @@
     foreach($cartItems as $item) {
     $total += $item->food->price * $item->quantity;
     }
-    $shipping = $total > 1000 ? 0 : 500;
+    $shipping = $total > 8 ? 0 : 5;
     @endphp
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 

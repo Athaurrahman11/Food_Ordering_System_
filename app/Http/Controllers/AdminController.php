@@ -12,12 +12,15 @@ use Illuminate\Http\Request;
 
 
 
+
+use App\Models\OrderArchive;
+
 class AdminController extends Controller
 {
     public function  index()  {
         $orders = Order::latest()->take(5)->get();
-        $total_revenue = Order::sum('price');
-        $total_orders = Order::count();
+        $total_revenue = OrderArchive::sum('price');
+        $total_orders = OrderArchive::count();
         $total_food_items = Food::count();
         $total_menu_items = Menu::count();
 
@@ -48,7 +51,7 @@ class AdminController extends Controller
         $request->validate([
             'category' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image',
         ]);
 
         $menuItem=new Menu;
@@ -127,6 +130,18 @@ class AdminController extends Controller
         $order = Order::findOrFail($id);
         $order->status = $status;
         $order->save();
+
+        if ($status === 'Delivered') {
+            if (!OrderArchive::where('original_order_id', $order->id)->exists()) {
+                OrderArchive::create([
+                    'original_order_id' => $order->id,
+                    'customer_name' => $order->customer_name,
+                    'price' => $order->price,
+                    'delivered_at' => now(),
+                ]);
+            }
+        }
+
         toastr()->closeButton(true)->success('Order status updated to ' . $status);
         return back();
     }
@@ -147,7 +162,7 @@ class AdminController extends Controller
              return back();
         }
 
-        $user->delete();
+        $user->forceDelete();
         toastr()->closeButton(true)->success('Customer deleted successfully.');
         return back();
     }
