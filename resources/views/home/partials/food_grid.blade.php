@@ -17,7 +17,7 @@
     <div class="group bg-[#2b2118] rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#f48c25]/20 hover:-translate-y-2 transition-all duration-500 flex flex-col relative h-full border border-white/5">
         
         <!-- Image Area -->
-        <div class="relative w-full aspect-[4/3] bg-slate-800 isolate transform-gpu">
+        <div class="relative h-60 bg-slate-800 isolate transform-gpu">
             <!-- Badges -->
             <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
                     <span class="bg-white text-green-600 text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg uppercase tracking-wider flex items-center gap-1">

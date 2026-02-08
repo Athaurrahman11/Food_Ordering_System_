@@ -16,7 +16,6 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // If user is logged in AND is an admin, redirect them to admin dashboard
         if (Auth::check() && Auth::user()->user_role === 'admin') {
             return redirect()->route('admin_dashboard');
         }

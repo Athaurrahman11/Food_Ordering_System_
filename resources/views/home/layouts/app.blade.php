@@ -53,14 +53,21 @@
 
 <body class="bg-[#fffbf7] text-slate-900 overflow-x-hidden selection:bg-[#f48c25] selection:text-white min-h-screen flex flex-col">
 
-  <nav class="fixed w-full z-[100] transition-all duration-300 px-6 py-4 lg:px-12 top-0">
+  <nav class="fixed w-full z-[100] transition-all duration-300 px-6 py-4 lg:px-12 top-0" id="navbar">
     <div class="glass max-w-7xl mx-auto rounded-full px-6 py-3 flex justify-between items-center shadow-lg shadow-black/5">
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden text-slate-800 hover:text-[#f48c25] transition-colors p-1">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+
       <a href="{{ route('user.home') }}" class="flex items-center gap-2 group">
         <img src="{{ asset('images/logo.svg') }}" alt="DineNexus Logo" class="w-10 h-10 shadow-lg shadow-orange-500/30 rounded-full group-hover:scale-110 transition-transform">
         <span class="text-xl font-bold tracking-tight text-slate-800">DineNexus<span class="text-[#f48c25]">.</span></span>
       </a>
 
-      <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-500">
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-500">
         <a href="{{ route('user.home') }}" class="hover:text-[#f48c25] transition-colors {{ request()->routeIs('user.home*') ? 'text-[#f48c25] font-semibold' : '' }}">Home</a>
         <a href="{{ route('shop') }}" class="hover:text-[#f48c25] transition-colors {{ request()->routeIs('shop*') ? 'text-[#f48c25] font-semibold' : '' }}">Menu</a>
         <a href="{{ route('about') }}" class="hover:text-[#f48c25] transition-colors {{ request()->routeIs('about*') ? 'text-[#f48c25] font-semibold' : '' }}">Story</a>
@@ -72,7 +79,7 @@
 
         @if (Route::has('login'))
         @auth
-        <h2 class="text-base lg:text-base font-black text-slate-900">Welcome, <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">{{ Auth::user()->name }}</span></h2>
+        <h2 class="hidden lg:block text-base lg:text-base font-black text-slate-900">Welcome, <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f48c25] to-red-600">{{ Auth::user()->name }}</span></h2>
         <a href="{{ route('cart.view') }}" class="relative w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-[#f48c25] transition-colors shadow-lg shadow-black/10">
           <span class="material-symbols-outlined text-[20px]">shopping_bag</span>
           @auth
@@ -97,11 +104,100 @@
         @else
         <a href="{{ route('login') }}" class="hidden lg:block text-slate-900 hover:text-[#f48c25] px-6 py-2.5 rounded-full text-xs font-bold transition-colors">Sign In</a>
         <a href="{{ route('register') }}" class="hidden lg:block bg-[#f48c25] hover:bg-orange-600 text-white px-8 py-3 rounded-full text-xs font-bold transition-all shadow-lg shadow-orange-500/30 hover:-translate-y-0.5">Register Now</a>
+        <!-- Mobile Login Link -->
+        <a href="{{ route('login') }}" class="lg:hidden text-slate-900 font-bold text-sm bg-slate-100 rounded-full px-4 py-2 hover:bg-[#f48c25] hover:text-white transition-colors">Login</a>
         @endauth
         @endif
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-[140] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
+
+  <!-- Mobile Sidebar -->
+  <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-[280px] bg-white shadow-2xl z-[150] transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col font-body">
+      <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+         <a href="{{ route('user.home') }}" class="flex items-center gap-2">
+            <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="w-8 h-8 rounded-full shadow-md">
+            <span class="text-lg font-bold tracking-tight text-slate-800">DineNexus<span class="text-[#f48c25]">.</span></span>
+         </a>
+         <button id="close-sidebar-btn" class="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:bg-rose-50 hover:text-rose-500 hover:border-rose-100 transition-all">
+            <span class="material-symbols-outlined text-lg">close</span>
+         </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto py-6 px-4 space-y-6">
+          @auth
+          <div class="bg-orange-50/50 rounded-2xl p-4 border border-orange-100/50">
+             <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-[#f48c25] text-white flex items-center justify-center text-lg font-bold shadow-md shadow-orange-500/20">
+                    {{ substr(Auth::user()->name, 0, 1) }}
+                </div>
+                <div class="overflow-hidden">
+                    <p class="font-bold text-slate-900 truncate">{{ Auth::user()->name }}</p>
+                    <p class="text-xs text-slate-500 truncate">{{ Auth::user()->email }}</p>
+                </div>
+             </div>
+             <a href="{{ route('my_orders') }}" class="w-full flex items-center justify-center gap-2 bg-white border border-orange-100 text-slate-700 py-2 rounded-xl text-xs font-bold hover:bg-[#f48c25] hover:text-white hover:border-[#f48c25] transition-all shadow-sm">
+                <span class="material-symbols-outlined text-sm">receipt_long</span>
+                View Orders
+             </a>
+          </div>
+          @endauth
+
+          <div class="space-y-1">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4 mb-2">Menu</p>
+            <a href="{{ route('user.home') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-slate-600 font-bold transition-all group {{ request()->routeIs('user.home*') ? 'bg-orange-50 text-[#f48c25]' : '' }}">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center group-hover:bg-orange-100 group-hover:text-[#f48c25] transition-colors {{ request()->routeIs('user.home*') ? '!bg-orange-100 !text-[#f48c25]' : '' }}">
+                    <span class="material-symbols-outlined text-lg">home</span>
+                </span>
+                Home
+            </a>
+            <a href="{{ route('shop') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-slate-600 font-bold transition-all group {{ request()->routeIs('shop*') ? 'bg-orange-50 text-[#f48c25]' : '' }}">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center group-hover:bg-orange-100 group-hover:text-[#f48c25] transition-colors {{ request()->routeIs('shop*') ? '!bg-orange-100 !text-[#f48c25]' : '' }}">
+                    <span class="material-symbols-outlined text-lg">restaurant_menu</span>
+                </span>
+                Menu
+            </a>
+            <a href="{{ route('about') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-slate-600 font-bold transition-all group {{ request()->routeIs('about*') ? 'bg-orange-50 text-[#f48c25]' : '' }}">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center group-hover:bg-orange-100 group-hover:text-[#f48c25] transition-colors {{ request()->routeIs('about*') ? '!bg-orange-100 !text-[#f48c25]' : '' }}">
+                    <span class="material-symbols-outlined text-lg">auto_stories</span>
+                </span>
+                Story
+            </a>
+            <a href="{{ route('contact') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-slate-600 font-bold transition-all group {{ request()->routeIs('contact*') ? 'bg-orange-50 text-[#f48c25]' : '' }}">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center group-hover:bg-orange-100 group-hover:text-[#f48c25] transition-colors {{ request()->routeIs('contact*') ? '!bg-orange-100 !text-[#f48c25]' : '' }}">
+                    <span class="material-symbols-outlined text-lg">support_agent</span>
+                </span>
+                Contact
+            </a>
+          </div>
+
+          @auth
+          <div class="pt-6 border-t border-slate-100">
+             <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-rose-50 text-slate-600 hover:text-rose-600 font-bold transition-all group text-left">
+                    <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center group-hover:bg-rose-100 group-hover:text-rose-600 transition-colors">
+                        <span class="material-symbols-outlined text-lg">logout</span>
+                    </span>
+                    Sign Out
+                </button>
+             </form>
+          </div>
+          @else
+          <div class="pt-6 border-t border-slate-100 space-y-3">
+               <a href="{{ route('login') }}" class="flex items-center justify-center w-full py-3 rounded-xl border border-slate-200 font-bold text-slate-700 hover:border-[#f48c25] hover:text-[#f48c25] transition-colors bg-white">
+                  Sign In
+               </a>
+               <a href="{{ route('register') }}" class="flex items-center justify-center w-full py-3 rounded-xl bg-[#f48c25] text-white font-bold shadow-lg shadow-orange-500/30 hover:bg-[#e07b1a] transition-all">
+                  Register Now
+               </a>
+          </div>
+          @endauth
+      </div>
+  </div>
 
   @yield('content')
 
@@ -187,6 +283,44 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+      // Mobile Sidebar Logic
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const sidebar = document.getElementById('mobile-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const closeBtn = document.getElementById('close-sidebar-btn');
+
+      function toggleSidebar() {
+          if (!sidebar || !backdrop) return;
+          
+          const isClosed = sidebar.classList.contains('-translate-x-full');
+          
+          if (isClosed) {
+              // Open Sidebar
+              sidebar.classList.remove('-translate-x-full');
+              backdrop.classList.remove('hidden');
+              // Small delay to allow display:block to apply before opacity transition
+              setTimeout(() => {
+                  backdrop.classList.remove('opacity-0');
+              }, 10);
+              document.body.style.overflow = 'hidden'; // Prevent scrolling
+          } else {
+              // Close Sidebar
+              sidebar.classList.add('-translate-x-full');
+              backdrop.classList.add('opacity-0');
+              
+              // Wait for transition to finish before hiding backdrop
+              setTimeout(() => {
+                  backdrop.classList.add('hidden');
+              }, 300);
+              document.body.style.overflow = ''; // Restore scrolling
+          }
+      }
+
+      if (mobileBtn) mobileBtn.addEventListener('click', toggleSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+      if (backdrop) backdrop.addEventListener('click', toggleSidebar);
+
       const toast = document.getElementById('toast-notification');
       let toastTimeout;
 

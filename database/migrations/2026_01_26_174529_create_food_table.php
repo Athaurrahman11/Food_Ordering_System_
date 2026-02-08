@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('stock');
             $table->string('image');
             $table->string('category');
-
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->timestamps();
         });
     }

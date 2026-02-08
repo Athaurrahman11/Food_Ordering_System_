@@ -40,7 +40,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-motorcycle text-[#f48c25] text-xl"></i>
-                    <span class="text-white font-bold text-sm">Free Shipping</span>
+                    <span class="text-white font-bold text-sm">With Shipping</span>
                 </div>
             </div>
         </div>

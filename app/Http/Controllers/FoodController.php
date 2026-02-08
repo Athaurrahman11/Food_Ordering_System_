@@ -138,7 +138,7 @@ class FoodController extends Controller
         foreach($cartItems as $item) {
             $total += $item->food->price * $item->quantity;
         }
-        $shipping = $total > 200 ? 0 : 100;
+        $shipping = $total > 8 ? 0 : 5;
         $final = $total + $shipping;
         $count = $cartItems->sum('quantity');
 
@@ -191,7 +191,7 @@ class FoodController extends Controller
             foreach($cartItems as $item) {
                 $total += $item->food->price * $item->quantity;
             }
-            $shipping = $total > 200 ? 0 : 100;
+            $shipping = $total > 8 ? 0 : 5;
             $final_amount = $total + $shipping;
 
             $order = new Order();
@@ -230,9 +230,19 @@ class FoodController extends Controller
         if($request->has('order_id')) {
             $order = Order::find($request->order_id);
             if($order) {
-                $order->status = 'Paid'; // Or Confirmed
+                $order->status = 'Paid'; 
                 $order->save();
                 
+               
+                if (!\App\Models\OrderArchive::where('original_order_id', $order->id)->exists()) {
+                    \App\Models\OrderArchive::create([
+                        'original_order_id' => $order->id,
+                        'customer_name' => $order->customer_name,
+                        'price' => $order->price,
+                        'delivered_at' => now(), 
+                    ]);
+                }
+
                 $user_id = $order->user_id;
                 Cart::where('user_id', $user_id)->delete();
                 
@@ -258,6 +268,13 @@ class FoodController extends Controller
         return redirect()->back()->with('error', 'Order not found.');
     }
     public function sendMessage(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'message' => 'required|string|max:5000',
+        ]);
+
         $contact = new Contact;
         $contact->name = $request->name;
         $contact->email = $request->email;

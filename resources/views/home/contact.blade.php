@@ -44,15 +44,21 @@
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Your Name</label>
                             <div class="relative">
                                 <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">person</span>
-                                <input type="text" name="name" placeholder="John Doe" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400">
+                                <input type="text" name="name" value="{{ old('name') }}" placeholder="John Doe" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('name') border-red-500 @enderror">
                             </div>
+                            @error('name')
+                                <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="space-y-2 group/input">
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Email Address</label>
                             <div class="relative">
                                 <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">mail</span>
-                                <input type="email" name="email" placeholder="john@example.com" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400">
+                                <input type="email" name="email" value="{{ old('email') }}" placeholder="john@example.com" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('email') border-red-500 @enderror">
                             </div>
+                            @error('email')
+                                <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -60,16 +66,22 @@
                         <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Phone Number</label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">call</span>
-                            <input type="tel" name="phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400">
+                            <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('phone') border-red-500 @enderror">
                         </div>
+                        @error('phone')
+                            <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="space-y-2 group/input">
                         <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Message</label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-5 top-6 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">chat</span>
-                            <textarea name="message" rows="5" placeholder="How can we help you?" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 resize-none"></textarea>
+                            <textarea name="message" rows="5" placeholder="How can we help you?" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 resize-none @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
                         </div>
+                        @error('message')
+                            <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit" class="w-full bg-gradient-to-r from-slate-900 to-slate-800 text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:from-[#f48c25] hover:to-orange-600 hover:shadow-xl hover:shadow-[#f48c25]/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group/btn relative overflow-hidden">

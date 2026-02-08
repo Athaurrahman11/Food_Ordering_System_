@@ -27,8 +27,10 @@
                                 </div>
                                 <p class="text-gray-900 dark:text-white text-lg font-bold">Upload Menu Image</p>
                             </div>
-                            <input type="file" class="px-6 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" name="image" required />
-
+                            <input type="file" class="px-6 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors @error('image') border-red-500 @enderror" name="image" required />
+                            @error('image')
+                                <p class="text-red-500 text-xs mt-1 font-bold">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -39,13 +41,21 @@
 
                         <div class="md:col-span-2 space-y-2">
                             <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Category</label>
-                            <input class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="Enter Category " type="text" name="category" required />
+                            <div class="relative">
+                                <input type="text" placeholder="e.g. Pizza" name="category" value="{{ old('category') }}" required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all pl-10 @error('category') border-red-500 @enderror" />
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">category</span>
+                            </div>
+                            @error('category')
+                                <p class="text-red-500 text-xs mt-1 font-bold">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="md:col-span-2 space-y-2">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:border-transparent text-sm" name="description" required>
-    </textarea>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Description</label>
+                            <textarea name="description" rows="4" placeholder="Describe this category..." required class="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
+                            @error('description')
+                                <p class="text-red-500 text-xs mt-1 font-bold">{{ $message }}</p>
+                            @enderror
                         </div>
 
                     </div>

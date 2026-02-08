@@ -33,7 +33,7 @@
             @foreach($food_items as $food)
             <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden group hover:shadow-xl transition-shadow">
                 <div class="relative h-48 overflow-hidden">
-                    <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('{{ Str::startsWith($food->image, ['http', 'https']) ? $food->image : asset('Food_items/' . $food->image) }}')"></div>
+                    <img src="{{ Str::startsWith($food->image, ['http', 'https']) ? $food->image : asset('Food_items/' . $food->image) }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-[10px] font-bold uppercase text-white tracking-widest">{{ $food->category }}</div>
                 </div>
                 <div class="p-5">
@@ -46,12 +46,12 @@
                         <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Stock: <span class="text-green-500 font-bold">{{ $food->stock }} items</span></span>
                     </div>
                     <div class="flex gap-2 pt-4 border-t border-gray-100 dark:border-gray-800">
-                        <a href="{{ url('edit_food/'.$food->id) }}" class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <a href="{{ url('edit_food/'.$food->id) }}" class="flex-1 h-10 flex items-center justify-center gap-2 px-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                             <span class="material-symbols-outlined text-lg">edit</span>
                             Edit
                         </a>
-                        <a href="{{ url('delete_food/'.$food->id) }}" onclick="confirmation(event)" class="flex items-center justify-center p-2 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all">
-                            <span class="material-symbols-outlined">delete</span>
+                        <a href="{{ url('delete_food/'.$food->id) }}" onclick="confirmation(event)" class="h-10 w-10 flex items-center justify-center bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-xl">delete</span>
                         </a>
                     </div>
                 </div>
