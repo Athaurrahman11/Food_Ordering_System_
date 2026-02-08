@@ -12,7 +12,6 @@ use App\Http\Controllers\StripeController;
 |--------------------------------------------------------------------------
 */
 
-// Admin Routes
 Route::middleware(['auth', 'verified', 'access_middleware'])->group(function () {
     Route::get('admin_dashboard',[AdminController::class,'index'])->name('admin_dashboard');
     Route::get('menu',[AdminController::class,'menu'])->name('menu');
@@ -35,10 +34,8 @@ Route::middleware(['auth', 'verified', 'access_middleware'])->group(function () 
     Route::get('delete_message/{id}',[AdminController::class,'delete_message'])->name('message.delete');
 });
 
-// User Dashboard (Authenticated)
 Route::get('/homepage', [FoodController::class, 'home'])->middleware(['auth', 'verified', 'user_middleware'])->name('dashboard');
 
-// Profile Routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -47,27 +44,19 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// -------------------------------------------------------------------------
-// Food Ordering System Routes
-// -------------------------------------------------------------------------
 
-// Public Routes (Accessible by Guest & User, Blocked for Admin)
 Route::middleware(['user_middleware'])->group(function () {
-    // Home Page
     Route::get('home',[FoodController::class, 'home'])->name('user.home'); 
     Route::get('/', [FoodController::class, 'home'])->name('home');
 
-    // Menu / Shop Page
     Route::get('/shop', [FoodController::class, 'index'])->name('shop');
 
-    // Static Pages
     Route::get('/about', function () { return view('home.about'); })->name('about');
     Route::get('/tracking', function () { return view('home.tracking'); })->name('tracking');
     Route::get('/contact', function () { return view('home.contact'); })->name('contact');
     Route::post('/contact', [FoodController::class, 'sendMessage'])->name('contact.store');
 });
 
-// Cart Actions (Session Based) - Users Only
 Route::middleware(['auth', 'verified', 'user_middleware'])->group(function () {
     Route::post('/cart-add', [FoodController::class, 'addToCart'])->name('cart.add');
     Route::get('/cart', [FoodController::class, 'viewCart'])->name('cart.view');
