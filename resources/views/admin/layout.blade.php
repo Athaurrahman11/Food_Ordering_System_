@@ -114,9 +114,9 @@
 
 
             <header class="bg-white dark:bg-card-dark border-b border-slate-200 dark:border-border-dark h-16 flex items-center justify-between px-4 md:hidden z-10">
-                <div class="flex items-center gap-2">
-                    <img class="w-8 h-8 rounded-full border border-blue-300" src="{{ asset('images/image.png') }}" />
-                    <span class="font-bold text-slate-900 dark:text-white">FoodAdmin</span>
+                <div class="flex items-center gap-3">
+                    <img class="w-8 h-8 rounded-full border border-slate-200 dark:border-slate-700 object-cover" src="{{ asset('images/admin_image/dark_admin.jpeg') }}" alt="Admin" />
+                    <span class="font-bold text-slate-900 dark:text-white">{{ Auth::user()->name }}</span>
                 </div>
                 <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
                     <span class="material-symbols-outlined">menu</span>
@@ -128,11 +128,15 @@
 
 
             <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-card-dark z-50 transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl md:hidden">
-                <div class="p-4 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
+                <div class="p-6 border-b border-slate-200 dark:border-border-dark flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/image.png') }}" alt="Admin" />
+                        <div class="relative">
+                            <img class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="{{ asset('images/admin_image/dark_admin.jpeg') }}" alt="Admin Profile" />
+                            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
+                        </div>
                         <div>
-                            <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">Food Admin</h1>
+                            <p class="text-xs font-bold text-primary mb-0.5">Welcome Back,</p>
+                            <h1 class="text-slate-900 dark:text-white text-sm font-bold leading-none">{{ Auth::user()->name }}</h1>
                             <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-0.5">Administrator</p>
                         </div>
                     </div>
@@ -176,10 +180,10 @@
                 </nav>
 
                 <div class="p-4 border-t border-slate-200 dark:border-border-dark">
-                    <button class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm">
-                        <span class="material-symbols-outlined text-sm">logout</span>
-                        Logout
-                    </button>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <input type="submit" onclick="logout_confirmation(event)" class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg transition-colors font-semibold text-sm cursor-pointer" value="LOGOUT">
+                    </form>
                 </div>
             </aside>
 

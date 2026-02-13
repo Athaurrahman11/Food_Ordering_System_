@@ -19,8 +19,8 @@ class AdminController extends Controller
 {
     public function  index()  {
         $orders = Order::latest()->take(5)->get();
-        $total_revenue = OrderArchive::sum('price');
-        $total_orders = OrderArchive::count();
+        $total_revenue = Order::sum('price');
+        $total_orders = Order::count();
         $total_food_items = Food::count();
         $total_menu_items = Menu::count();
 
