@@ -44,7 +44,7 @@
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Your Name</label>
                             <div class="relative">
                                 <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">person</span>
-                                <input type="text" name="name" value="{{ old('name') }}" placeholder="John Doe" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('name') border-red-500 @enderror">
+                                <input type="text" name="name" value="{{ old('name') }}" placeholder="Athaurrahman" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('name') border-red-500 @enderror">
                             </div>
                             @error('name')
                                 <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>
@@ -54,7 +54,7 @@
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within/input:text-[#f48c25] transition-colors">Email Address</label>
                             <div class="relative">
                                 <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-[#f48c25] transition-colors">mail</span>
-                                <input type="email" name="email" value="{{ old('email') }}" placeholder="john@example.com" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('email') border-red-500 @enderror">
+                                <input type="email" name="email" value="{{ old('email') }}" placeholder="atha278200@gmail.com" required class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl pl-14 pr-5 py-4.5 outline-none focus:border-[#f48c25] focus:bg-white focus:shadow-[0_10px_30px_-10px_rgba(244,140,37,0.2)] transition-all font-bold text-slate-800 placeholder:font-medium placeholder:text-slate-400 @error('email') border-red-500 @enderror">
                             </div>
                             @error('email')
                                 <p class="text-red-500 text-xs mt-1 font-bold ml-1">{{ $message }}</p>

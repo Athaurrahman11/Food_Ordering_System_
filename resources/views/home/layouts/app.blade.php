@@ -118,9 +118,9 @@
   <!-- Mobile Sidebar -->
   <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-[280px] bg-white shadow-2xl z-[150] transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col font-body">
       <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-         <a href="{{ route('user.home') }}" class="flex items-center gap-2">
-            <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="w-8 h-8 rounded-full shadow-md">
-            <span class="text-lg font-bold tracking-tight text-slate-800">DineNexus<span class="text-[#f48c25]">.</span></span>
+         <a href="{{ route('user.home') }}" class="flex items-center gap-2 group">
+            <img src="{{ asset('images/logo.svg') }}" alt="DineNexus Logo" class="w-10 h-10 shadow-lg shadow-orange-500/30 rounded-full group-hover:scale-110 transition-transform">
+            <span class="text-xl font-bold tracking-tight text-slate-800">DineNexus<span class="text-[#f48c25]">.</span></span>
          </a>
          <button id="close-sidebar-btn" class="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:bg-rose-50 hover:text-rose-500 hover:border-rose-100 transition-all">
             <span class="material-symbols-outlined text-lg">close</span>

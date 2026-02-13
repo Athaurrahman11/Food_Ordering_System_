@@ -290,13 +290,92 @@
             <h2 class="text-3xl font-black text-slate-900 mb-4">Subscribe to our Newsletter</h2>
             <p class="text-slate-500 font-body mb-8">Don't miss out on our latest delicious offers and updates.</p>
 
-            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input type="email" placeholder="Enter your email" class="flex-1 bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-[#f48c25] transition-colors font-bold text-slate-800">
-                <button class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-[#f48c25] transition-colors">Subscribe</button>
+            <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input id="newsletter-email" type="email" placeholder="Enter your email" class="flex-1 bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-[#f48c25] transition-colors font-bold text-slate-800" required>
+                <button type="submit" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-[#f48c25] transition-colors">Subscribe</button>
             </form>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('newsletter-form');
+        const emailInput = document.getElementById('newsletter-email');
+        const toast = document.getElementById('toast-notification');
+        let toastTimeout;
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const email = emailInput.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!email || !emailRegex.test(email)) {
+                    // Show error toast
+                     if (toast) {
+                        const iconContainer = toast.querySelector('.w-8');
+                        const iconSpan = toast.querySelector('.material-symbols-outlined');
+                        
+                        toast.querySelector('h4').textContent = 'Error';
+                        toast.querySelector('p').textContent = 'Please enter a valid email address.';
+                        
+                        if (iconContainer) {
+                            iconContainer.classList.remove('bg-green-500');
+                            iconContainer.classList.add('bg-red-500');
+                        }
+                        if (iconSpan) iconSpan.textContent = 'warning';
+
+                        toast.classList.remove('translate-y-24', 'opacity-0');
+                        clearTimeout(toastTimeout);
+                        
+                        toastTimeout = setTimeout(() => {
+                            toast.classList.add('translate-y-24', 'opacity-0');
+                            // Reset style
+                             setTimeout(() => {
+                                if (iconContainer) {
+                                    iconContainer.classList.add('bg-green-500');
+                                    iconContainer.classList.remove('bg-red-500');
+                                }
+                                if (iconSpan) iconSpan.textContent = 'check';
+                            }, 300);
+                        }, 3000);
+                    } else {
+                        alert('Please enter a valid email address.');
+                    }
+                    return;
+                }
+
+                // Show success toast
+                if (toast) {
+                    const iconContainer = toast.querySelector('.w-8');
+                    const iconSpan = toast.querySelector('.material-symbols-outlined');
+
+                    toast.querySelector('h4').textContent = 'Subscribed';
+                    toast.querySelector('p').textContent = 'You have successfully subscribed to our newsletter.';
+                    
+                     if (iconContainer) {
+                        iconContainer.classList.add('bg-green-500');
+                        iconContainer.classList.remove('bg-red-500');
+                    }
+                    if (iconSpan) iconSpan.textContent = 'check';
+
+                    toast.classList.remove('translate-y-24', 'opacity-0');
+                    clearTimeout(toastTimeout);
+                    toastTimeout = setTimeout(() => {
+                        toast.classList.add('translate-y-24', 'opacity-0');
+                    }, 3000);
+                } else {
+                    alert('Subscribed successfully!');
+                }
+
+                form.reset();
+            });
+        }
+    });
+</script>
+
 
 
 @endsection
